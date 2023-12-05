@@ -12,7 +12,7 @@ class PersonaController extends Controller
      */
     public function index()
     {
-        //
+       return("Hola mundo");
     }
 
     /**
@@ -28,7 +28,18 @@ class PersonaController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $request->validate([
+            'nombreCompleto' => 'required',
+            'identificacion' => 'required',
+            'fechaNacimiento' => 'required'
+        ]);
+        Persona::create([
+            'nombreCompleto' => $request->get('nombreCompleto'),
+            'identificacion' => $request->get('identificacion'),
+            'fechaNacimiento' => $request->get('fechaNacimiento')
+
+        ]);
+       
     }
 
     /**

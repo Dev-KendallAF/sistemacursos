@@ -13,7 +13,7 @@
       <div class="container mx-auto md:my-0">
         <div class="flex justify-center items-center h-screen ">
           <div class=" bg-white dark:bg-gray-800 shadow-2xl rounded-lg p-10 w-full md:w-9/12"> 
-            <form action="" method="POST">
+            <form action="{{route('persona.store')}}" method="POST">
               @csrf
               <div>
                 <a href="{{route('index')}}"><i class="fa-solid fa-circle-chevron-left mx-2 pb-2 fa-lg text-indigo-600"></i></a>
@@ -26,15 +26,23 @@
                 <div>
           
                  <!-- NombreCompleto-->
-                  <label for="txt_nombre" class=" dark:text-indigo-500"> <i class="fa-regular fa-user text-indigo-600"></i> Nombre Completo</label>
-                  <input type="text" name="nombre" id="txt_nombre" class="" placeholder="Ingresa el nombre completo" required>
-                 <!-- NombreCompleto-->
+                  <label for="txt_nombre" class=" dark:text-indigo-500"> <i class="fa-regular fa-user text-indigo-600 "></i> Nombre Completo</label>
+                  <input type="text" name="nombreCompleto" id="txt_nombre" class="" placeholder="Ingresa el nombre completo" >
+                 @error('nombreCompleto')
+                     {{$message}}
+                 @enderror
+                  <!-- Identificacion-->
                   <label for="txt_cedula" class=" dark:text-indigo-500"> <i class="fa-regular fa-address-card text-indigo-600"></i> Identificaci&oacute;n</label>
-                  <input type="text" name="nombre" id="txt_cedula" class="" placeholder="_ ____ ___" required>
-                   
+                  <input type="text" name="identificacion" id="txt_cedula" class="" placeholder="_ ____ ___" >
+                  @error('identificacion')
+                  {{$message}}
+                  @enderror
                  <!-- Fecha Nacimiento-->
                  <label for="txt_fechaNaciento" class=" dark:text-indigo-500"> <i class="fa-solid fa-cake-candles text-indigo-600"></i> Fecha Nacimiento</label>
-                 <input type="date" name="nombre" id="txt_fechaNaciento" class="" placeholder="" max = "@php echo date("Y-m-d",strtotime(date("Y-m-d")."- 10 years"));@endphp" required>
+                 <input type="date" name="fechaNacimiento" id="txt_fechaNaciento" class="" placeholder="" max = "@php echo date("Y-m-d",strtotime(date("Y-m-d")."- 10 years"));@endphp" >
+                 @error('fechaNacimiento')
+                 {{$message}}
+                 @enderror
                 </div>
 
                  <!-- Datos Usuario -->
@@ -42,8 +50,10 @@
                  
                  <!-- Email -->
                 <label for="txt_email" class="dark:text-indigo-500"> <i class="fa-regular fa-envelope text-indigo-600"></i> Correo electrónico </label>
-                <input type="email" id="txt-email" class="" placeholder="estudiante@cursos.cr" required>
-                 
+                <input type="email" id="txt-email" name="email" placeholder="estudiante@cursos.cr" >
+                @error('email')
+                {{$message}}
+                @enderror
                 <!-- Password -->
                 <div class="form-group-password">
                   <label for="txt_password" class="dark:text-indigo-500"><i class="fa-solid fa-lock text-indigo-600"></i> Contraseña</label>
@@ -56,6 +66,9 @@
                     </div>
                   </div>
                 </div>
+                @error('password')
+                {{$message}}
+                @enderror
                  <!-- Telefono -->
                  <div>
                   <label for="txt_telefono" class="dark:text-indigo-500"><i class="fa-solid fa-phone text-indigo-600"></i> Tel&eacute;fono <span class="text-indigo-400">(opcional)</span></label>
@@ -66,7 +79,9 @@
                     <input type="text" name="telefono" id="txt_telefono"  style="padding-left: 2.2rem !important; " placeholder="+506">
                   </div>
                  </div>
-
+                 @error('telefono')
+                 {{$message}}
+                 @enderror
                 </div>
 
               </div>
