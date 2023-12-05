@@ -1,0 +1,21 @@
+.dropdown
+{
+      @apply relative inline-block text-left;
+      &__header
+        {
+          >button
+          {
+            @apply inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white dark:bg-indigo-400 transition ease-in dark:hover:bg-indigo-300 dark:text-white px-3 py-2 text-sm font-semibold
+             text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50;
+          }
+
+        }
+        &__menu
+        {
+          @apply  absolute right-0 z-10 mt-2 w-36 origin-top-right divide-y divide-gray-100 rounded-md bg-white dark:bg-indigo-300  shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none;
+          &>div p,a
+          {
+            @apply text-gray-700 block px-4 py-1 text-sm dark:text-white transition ease-in hover:bg-gray-100 dark:hover:bg-indigo-400
+          }
+        }
+}

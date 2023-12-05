@@ -1,0 +1,110 @@
+ .sidebar
+ {
+  @apply  dark:bg-indigo-500 h-screen fixed top-0 left-0  w-64 hidden shadow-2xl drop-shadow-2xl	md:block ;
+  &.__header
+  {
+    color: #f1f1f1f1;
+    &:first-child 
+    {
+      @apply flex place-items-center  gap-3;
+    }
+  }
+  &__body
+  {
+    @apply  dark:text-white h-2/4  overflow-y-auto;
+    
+    &::-webkit-scrollbar {
+      width: 5px;     /* Tamaño del scroll en vertical */
+      height: 8px;    /* Tamaño del scroll en horizontal */
+    }
+    /* Ponemos un color de fondo y redondeamos las esquinas del thumb */
+    &::-webkit-scrollbar-thumb {
+        background: #cfcfcf;
+        border-radius: 2px;
+    }
+    /* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
+    &::-webkit-scrollbar-thumb:hover {
+        background: #b3b3b3;
+        box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+    }
+    /* Cambiamos el fondo cuando esté en active */
+    &::-webkit-scrollbar-thumb:active {
+        background-color: #999999;
+    }
+
+    /* Ponemos un color de fondo y redondeamos las esquinas del track */
+    &::-webkit-scrollbar-track {
+        background: #e1e1e100;
+        border-radius: 4px;
+    }
+
+
+
+  }
+
+  &__item
+  {
+    @apply  py-3 px-2 transition ease-in ;
+    &:hover
+    {
+      @apply dark:bg-indigo-400 bg-gray-50 ;
+      div i
+      {
+        @apply bg-gradient-to-r from-cyan-300 via-purple-500 to-pink-500  ;
+      }
+    }
+  }
+&__link
+{
+  padding-left: 1rem;
+  @apply flex place-items-center gap-3;
+  &>div p 
+  {
+    @apply font-semibold;
+  }
+  &>div i
+  {
+    @apply rounded-lg p-3 border border-gray-400;
+    transition: all ease-in 0.5s;
+
+  }
+  &--active
+  {
+    @apply  rounded-lg bg-white dark:bg-indigo-400 p-2 shadow-md dark:shadow-indigo-400/50;
+    &>div i
+    {
+      @apply bg-gradient-to-r  from-cyan-300 via-purple-500 to-pink-500 rounded-lg p-3 transition ease-in  ;
+      border: none;
+    }
+  }
+
+}
+ &__footer
+ {
+  @apply absolute bottom-0 left-0 w-full h-2/6;
+  &--content
+  {
+    @apply rounded-lg bg-white dark:bg-indigo-400 p-5 shadow-lg dark:shadow-indigo-400/50 ;
+  }
+
+ }
+ &__porfile
+ {
+  @apply flex items-center gap-7 dark:text-black font-semibold;
+  &--image
+  {
+  @apply inline w-10 h-10 content-center rounded-full ;
+  }
+ }
+ &__returnHome
+ {
+  @apply flex gap-3  items-center text-center ;
+  >a
+  {
+    @apply rounded-xl bg-gradient-to-r from-cyan-300 via-purple-500 to-pink-500   w-full  p-2  shadow-md shadow-indigo-500/50 text-white;
+  }
+ }
+}
+
+
+
