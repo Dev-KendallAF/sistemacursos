@@ -29,8 +29,8 @@ class PersonaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombreCompleto' => 'required',
-            'identificacion' => 'required',
+            'nombreCompleto' => ['required','min:10','max:250'],
+            'identificacion' => ['required','min:9','max:15','numeric'],
             'fechaNacimiento' => 'required'
         ]);
         Persona::create([

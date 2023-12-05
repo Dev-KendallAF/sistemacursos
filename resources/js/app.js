@@ -1,7 +1,9 @@
 import './bootstrap';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import IMask from 'imask';
 import './utilities/dropdown';
+
 
 setTimeout(()=>
 {
