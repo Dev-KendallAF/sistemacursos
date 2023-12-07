@@ -1,4 +1,6 @@
-﻿
+﻿import $ from "jquery";
+import IMask from 'imask';
+
 var listMask = [];
 $(function () {
     $("input").each(function (index) {
@@ -10,17 +12,30 @@ $(function () {
 
                 mask = value.nodeValue;
             }
+
         });
 
         if (mask != "") {
-            if (mask == "num") {
+            var e = this;
+            switch(mask)
+            {
+                case "num":
+                    AddMaskNumber(e)
+                break;
+                case "char":
+                    AddMaskChar(e)
 
-                var e = this;
-                AddMaskNumber(e)
-            } else {
-                var input = { index, mask }
-                listMask.push(input);
+                break;
+                case "dni":
+                    AddMaskDNI(e)
+                break;
+                default:
+                    var input = { index, mask }
+                    listMask.push(input);
+                break;
             }
+           
+            
         }
     });
     AddMaskInputs(listMask);
@@ -47,7 +62,25 @@ function AddMaskNumber(element) {
         max: 999999999
     };
     var mask = IMask(element, maskOptions);
-    console.log('se añidio la mas')
+}
+function AddMaskDNI(element) {
+    var maskOptions =
+    {
+        mask: '#\\0000[0]\\0000',
+        definitions: {
+          '#': /[1-9]/
+        }
+    };
+    var mask = IMask(element, maskOptions);
+}
+
+function AddMaskChar(element) {
+    var maskOptions =
+    {
+        mask: /^[A-Za-z\s]+$/
+        
+    };
+    var mask = IMask(element, maskOptions);
 }
 
 function AddMaskInputs(list) {

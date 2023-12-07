@@ -28,7 +28,7 @@
                   <!-- NombreCompleto-->
                     <div class="form-group @error('nombreCompleto') invalid @enderror">
                       <label for="txt_nombre" class=" dark:text-indigo-500 error:border-red-500  "> <i class="fa-regular fa-user text-indigo-600 "></i> Nombre Completo</label>
-                      <input type="text" name="nombreCompleto" id="txt_nombre" class="" placeholder="Ingresa el nombre completo"  value="{{old('nombreCompleto')}}" autocomplete="off" >
+                      <input type="text" name="nombreCompleto" id="txt_nombre" mask="char" placeholder="Ingresa el nombre completo"  value="{{old('nombreCompleto')}}" autocomplete="off" >
                       @error('nombreCompleto')
                         <span class="message__error"><i class="fa-solid fa-circle-exclamation fa-fade"></i> {{$message}}</span>
                     @enderror
@@ -38,7 +38,7 @@
                     <!-- Identificacion-->
                     <div class="form-group @error('identificacion') invalid @enderror">
                       <label for="txt_cedula" class=" dark:text-indigo-500"> <i class="fa-regular fa-address-card text-indigo-600"></i> Identificaci&oacute;n</label>
-                      <input type="text" name="identificacion" id="txt_cedula" class="" mask='num' placeholder="_ ____ ___"  autocomplete="off">
+                      <input type="text" name="identificacion" id="txt_cedula" class="" mask='dni' placeholder="_ ____ ___"  autocomplete="off" value="{{old('identificacion')}}">
                       @error('identificacion')
                       <span class="message__error"><i class="fa-solid fa-circle-exclamation fa-fade"></i> {{$message}}</span>
                       @enderror
@@ -47,7 +47,7 @@
                   <!-- Fecha Nacimiento-->
                   <div class="form-group  @error('fechaNacimiento') invalid @enderror">
                     <label for="txt_fechaNaciento" class=" dark:text-indigo-500"> <i class="fa-solid fa-cake-candles text-indigo-600"></i> Fecha Nacimiento</label>
-                    <input type="date" name="fechaNacimiento" id="txt_fechaNaciento" class="" placeholder="" max = "@php echo date("Y-m-d",strtotime(date("Y-m-d")."- 10 years"));@endphp" >
+                    <input type="date" name="fechaNacimiento" id="txt_fechaNaciento"  max = "@php echo date("Y-m-d",strtotime(date("Y-m-d")."- 10 years"));@endphp" >
                     @error('fechaNacimiento')
                     <span class="message__error"><i class="fa-solid fa-circle-exclamation fa-fade"></i> {{$message}}</span>
                     @enderror
@@ -59,13 +59,15 @@
                 <div>
                  
                  <!-- Email -->
-                <label for="txt_email" class="dark:text-indigo-500"> <i class="fa-regular fa-envelope text-indigo-600"></i> Correo electrónico </label>
-                <input type="email" id="txt-email" name="email" placeholder="estudiante@cursos.cr" autocomplete="off">
-                @error('email')
-                {{$message}}
-                @enderror
+                 <div class="form-group @error('email') invalid @enderror">
+                  <label for="txt_email" class="dark:text-indigo-500"> <i class="fa-regular fa-envelope text-indigo-600"></i> Correo electrónico </label>
+                  <input type="text" id="txt-email" name="email" placeholder="estudiante@cursos.cr" autocomplete="off" value="{{old('email')}}">
+                  @error('email')
+                  <span class="message__error"><i class="fa-solid fa-circle-exclamation fa-fade"></i> {{$message}}</span>
+                  @enderror
+                </div>
                 <!-- Password -->
-                <div class="form-group-password">
+                <div class="form-group @error('password') invalid @enderror">
                   <label for="txt_password" class="dark:text-indigo-500"><i class="fa-solid fa-lock text-indigo-600"></i> Contraseña</label>
                   <div class="relative mt-2 rounded-md shadow-sm">
                     <input type="password" name="password" id="txt_password"  placeholder="Ingresa tu contraseña" autocomplete="off">
@@ -77,7 +79,7 @@
                   </div>
                 </div>
                 @error('password')
-                {{$message}}
+                <span class="message__error"><i class="fa-solid fa-circle-exclamation fa-fade"></i> {{$message}}</span>
                 @enderror
                  <!-- Telefono -->
                  <div>
@@ -86,11 +88,11 @@
                     <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                       <span class="text-gray-500 sm:text-sm"><x-icons.flag /></span>
                     </div>
-                    <input type="text" name="telefono" id="txt_telefono"  style="padding-left: 2.2rem !important; " placeholder="+506">
+                    <input type="text" name="telefono" id="txt_telefono" mask='+5\06\ 0000-0000' autocomplete="off"  style="padding-left: 2.2rem !important; " placeholder="+506">
                   </div>
                  </div>
                  @error('telefono')
-                 {{$message}}
+                 <span class="message__error"><i class="fa-solid fa-circle-exclamation fa-fade"></i> {{$message}}</span>
                  @enderror
                 </div>
 
@@ -100,7 +102,7 @@
 
 
               
-              <div class="grid  items-center">
+              <div class="grid items-center">
                 <button type="submit" class="rounded-xl bg-indigo-600 w-100 my-10 p-2  shadow-md shadow-indigo-500/50 text-white  ">
                   Ingresar
                 </button>

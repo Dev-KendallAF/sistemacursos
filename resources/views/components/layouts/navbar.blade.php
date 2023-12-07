@@ -31,11 +31,29 @@
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex navlink">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-           
+            @guest
             <a href="{{route('index')}}" @if($navindex=='1')class="active"@endif aria-current="page">Todos los Cursos</a>
             <a href="{{route('register')}}" @if($navindex=='2')class="active"@endif >Registrarse</a>
             <a href="{{route('login')}}" @if($navindex=='3')class="active"@endif>Iniciar Sesión</a>
-            
+            @else
+                <!-- Mostrar esto si el usuario está autenticado -->
+                <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+
+                @if(Auth::user()->role_id == 2)
+                    <!-- Opciones específicas para el rol de Profesor -->
+                    <li><a href="{{ route('mis-cursos') }}">Mis cursos</a></li>
+                @elseif(Auth::user()->role_id == 3)
+                    <!-- Opciones específicas para el rol de Estudiante -->
+                    <li><a href="{{ route('mi-perfil') }}">Mi perfil</a></li>
+                @endif
+
+                <li>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit">Cerrar sesión</button>
+                    </form>
+                </li>
+            @endguest
           </div>
         </div>
       </div>

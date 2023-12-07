@@ -11,6 +11,8 @@ Route::controller(PersonaController::class)->group(
         $ruta = "persona";
         Route::get("$ruta/", 'index')->name("$ruta.index");
         Route::post("$ruta", 'store')->name("$ruta.store");
+        Route::post("$ruta", 'login')->name("user.login");
+
         //Route::get("$ruta/create", 'create');
         //Route::get("$ruta/edit/{id}", 'edit')->where('id','[0-9]+');
         //Route::get("$ruta/show/{id}", 'show');
@@ -21,6 +23,10 @@ Route::controller(PersonaController::class)->group(
 Route::get('/', function () {
     return view('index');
 })->name('index');
+
+Route::get('/user/confirm/EmailValidation', function () {
+    return view('Validation/emailvalidation');
+})->name('user.email');
 
 Route::get('/register', function () {
     return view('register');

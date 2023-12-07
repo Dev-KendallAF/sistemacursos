@@ -13,7 +13,7 @@
         <div class="flex justify-center items-center h-screen ">
           <div class=" bg-white dark:bg-gray-800 shadow-2xl rounded-lg p-10 w-7/12"> 
 
-            <form action="" method="POST">
+            <form action="{{route('user.login')}}" method="POST">
               @csrf
               <div>
                 <a href="{{route('index')}}"><i class="fa-solid fa-circle-chevron-left mx-2 pb-2 fa-lg text-indigo-600"></i></a>
@@ -21,14 +21,20 @@
               </div>
               <hr class="my-3">
               <div class="mt-7">
-                <label for="txt_email" class=""> <i class="fa-regular fa-user"></i> Correo electrónico </label>
-                <input type="email" id="txt-email" class="" placeholder="estudiante@cursos.cr" required>
+                <div class="form-group @error('email') invalid @enderror">
+                  <label for="txt_email" class=""> <i class="fa-regular fa-user"></i> Correo electrónico </label>
+                  <input type="email" id="txt-email" name="email" placeholder="estudiante@cursos.cr" value="{{old('email')}}" required>
+                  @error('email')
+                  <span class="message__error"><i class="fa-solid fa-circle-exclamation fa-fade"></i> {{$message}}</span>
+                  @enderror   
+                </div>
+               
         
-                <div class="form-group-password">
+                <div class="form-group @error('password') invalid @enderror">
                   <label for="txt_password"><i class="fa-solid fa-lock"></i> Contraseña</label>
   
                   <div class="relative mt-2 rounded-md shadow-sm">
-                    <input type="password" name="password" id="txt_password"  placeholder="Ingresa tu contraseña">
+                    <input type="password" name="password" id="txt_password"  placeholder="Ingresa tu contraseña" required>
                     <div class="absolute inset-y-0 right-0 flex items-center">
                       <button type="button" id="btn-togglepassword" class="_disable-btnPassword">
                         <i class="fa-solid fa-eye-slash"></i>
@@ -36,8 +42,9 @@
                     </div>
                   </div>
                 </div>
-  
-                
+                @error('password')
+                <span class="message__error"><i class="fa-solid fa-circle-exclamation fa-fade"></i> {{$message}}</span>
+                @enderror                
                 <div class="grid  items-center">
                   <button type="submit" class="rounded-xl bg-indigo-600 w-100 my-10 p-2  shadow-md shadow-indigo-500/50 text-white  ">
                     Ingresar

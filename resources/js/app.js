@@ -1,8 +1,11 @@
 import './bootstrap';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import IMask from 'imask';
+import $ from "jquery";
 import './utilities/dropdown';
+import './utilities/maskInput';
+
+
 
 
 setTimeout(()=>
@@ -11,20 +14,16 @@ setTimeout(()=>
 
 },1000)
 
-document.addEventListener("DOMContentLoaded", function() 
-{
- 
-    const userTheme = localStorage.getItem("theme")
+$(function() {
+    //Opciones del tema
+    const userTheme = localStorage.getItem("theme");
     const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    
-    if(userTheme==="dark" || (!userTheme && systemTheme))
-    {
-        document.documentElement.classList.add("dark")
-        document.body.classList.add('darkMode')
-        return;
-    }
-    document.body.classList.add('lightMode')
 
+    $("body").addClass(userTheme === "dark" || (!userTheme && systemTheme) ? "darkMode" : "lightMode");
+    $("html").toggleClass("dark", userTheme === "dark" || (!userTheme && systemTheme));
+
+    //validaciones 
 
 
 });
+
