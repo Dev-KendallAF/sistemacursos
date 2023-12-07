@@ -9,6 +9,8 @@ use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
+
 
 
 class PersonaController extends Controller
@@ -28,56 +30,6 @@ class PersonaController extends Controller
     {
         
     }
-
-
-
-
-    public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-    
-        if (Auth::attempt($credentials)) {
-            // Autenticación exitosa
-    
-            $user = Auth::user();
-    
-            switch ($user->role_id) {
-                case 1:
-                    // Administrador
-                    return redirect()->intended('/dashboard');
-                    break;
-                case 2:
-                    // Profesor
-                    return redirect()->intended('/mis-cursos');
-                    break;
-                case 3:
-                    // Estudiante
-                    return redirect()->intended('/mi-perfil');
-                    break;
-            }
-        }
-    
-        // La autenticación falló
-        $user = User::where('email', $request->email)->first();
-    
-        if (!$user) {
-            // El correo electrónico no está registrado
-            return redirect()->route('login')->withErrors(['email' => 'Correo electrónico no registrado']);
-        }
-    
-        if (!Hash::check($request->password, $user->password)) {
-            // La contraseña es incorrecta
-            return redirect()->route('login')->withErrors(['password' => 'Contraseña incorrecta']);
-        }
-    
-        return redirect()->route('login')->withErrors(['email' => 'Credenciales incorrectas']);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    
-
 
     public function store(Request $request)
     {
@@ -118,6 +70,67 @@ class PersonaController extends Controller
     
         return redirect()->route('user.email')->with('email', $request->email);
     }
+
+
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+        
+        if (Auth::attempt($credentials)) {
+            // Autenticación exitosa
+    
+            $user = Auth::user();
+            $persona = Persona::find($user->persona_id);
+    
+            // Almacenar datos de Persona en la sesión
+            Session::put('persona', $persona);
+    
+            switch ($user->role_id) {
+                case 1:
+                    // Administrador
+                    return redirect()->route('dashboard');
+                    break;
+                case 2:
+                    // Profesor
+                    return redirect()->route('clases');
+                    break;
+                case 3:
+                    // Estudiante
+                    return redirect()->route('index');
+                    break;
+            }
+        }
+    
+        // La autenticación falló
+        $user = User::where('email', $request->email)->first();
+    
+        if (!$user) {
+            // El correo electrónico no está registrado
+            return redirect()->route('login')->withErrors(['email' => 'Correo electrónico no registrado']);
+        }
+    
+        if (!Hash::check($request->password, $user->password)) {
+            // La contraseña es incorrecta
+            return redirect()->route('login')->withErrors(['password' => 'Contraseña incorrecta']);
+        }
+    
+        return redirect()->route('login')->withErrors(['email' => 'Credenciales incorrectas']);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        Session::flush();
+        return redirect()->route('index'); // Reemplaza 'home' con la ruta a la que deseas redirigir después de cerrar sesión
+    }
+    
+    /**
+     * Store a newly created resource in storage.
+     */
+    
+
+
+
 
     /**
      * Display the specified resource.

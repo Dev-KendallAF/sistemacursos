@@ -122,11 +122,6 @@
 </div>
 
 <script>
-      function toggleDropdown(dropdown) {
-        const dropdownMenu = dropdown.getElementsByClassName("dropdown__menu")[0];
-        dropdownMenu.classList.toggle('hidden');
-      }
-
         //Visual
         const darkModeButton = document.getElementById("darkModeToggle");
         const icon = document.getElementById("iconDarkMode");

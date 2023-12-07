@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Iniciar Sesión</title>
+        <title>Validaci&oacute;n Email</title>
         <script src="https://kit.fontawesome.com/eddade569a.js" crossorigin="anonymous"></script>
         @vite(['resources/css/app.scss','resources/js/app.js'])
         

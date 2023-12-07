@@ -13,7 +13,7 @@
       <div class="container mx-auto md:my-0">
         <div class="flex justify-center items-center h-screen ">
           <div class=" bg-white dark:bg-gray-800 shadow-2xl rounded-lg p-10 w-full md:w-9/12"> 
-            <form action="{{ route('persona.store') }}" method="POST">
+            <form action="{{route('persona.store')}}" method="POST">
               @csrf
               <div>
                 <a href="{{route('index')}}"><i class="fa-solid fa-circle-chevron-left mx-2 pb-2 fa-lg text-indigo-600"></i></a>

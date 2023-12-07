@@ -1,4 +1,4 @@
-<nav class="bg-white text-black dark:bg-blue-950 dark:text-white md:fixed md:top-0 md:w-full md:z-50">
+<nav class="navbar bg-white text-black dark:bg-blue-950 dark:text-white md:fixed md:top-0 md:w-full md:z-50">
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
     <div class="relative flex h-16 items-center justify-between">
       <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -29,31 +29,51 @@
           <img class="h-8 w-auto sm:hidden" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
         </div>
         <div class="hidden sm:ml-6 sm:block">
-          <div class="flex navlink">
+          <div class="flex navbar__link">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+
             @guest
-            <a href="{{route('index')}}" @if($navindex=='1')class="active"@endif aria-current="page">Todos los Cursos</a>
             <a href="{{route('register')}}" @if($navindex=='2')class="active"@endif >Registrarse</a>
             <a href="{{route('login')}}" @if($navindex=='3')class="active"@endif>Iniciar Sesión</a>
             @else
-                <!-- Mostrar esto si el usuario está autenticado -->
-                <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
 
-                @if(Auth::user()->role_id == 2)
-                    <!-- Opciones específicas para el rol de Profesor -->
-                    <li><a href="{{ route('mis-cursos') }}">Mis cursos</a></li>
-                @elseif(Auth::user()->role_id == 3)
-                    <!-- Opciones específicas para el rol de Estudiante -->
-                    <li><a href="{{ route('mi-perfil') }}">Mi perfil</a></li>
+
+                <div class="navbar__porfile">
+                  <div>
+                    <img src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg"   class="navbar__porfile--image">  
+                  </div>
+                    <!--Dropdown-->
+                    <div class="dropdown" onclick="toggleDropdown(this)">
+                      <div class="dropdown__header">
+                        <button type="button"  >
+                          {{session('persona')->nombreCompleto}}
+                          <i class="fa-solid fa-angle-down pt-1.5 text-gray-500"></i>
+                        </button>
+                      </div>
+                      <div class="dropdown__menu hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+                        <div class="py-1" role="none">
+                          <a href="#" class="" role="menuitem" tabindex="-1" id="menu-item-0">Ver Perfil</a>
+                          <a href="#" class="text-gray-700 block px-4 py-1 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Modificar</a>
+                        </div>
+                        <div class="py-1" role="none">
+                          <a href="{{ route('user.logout') }}" class="text-gray-700 block px-4 py-1 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">Cerrar Sesi&oacute;n</a>
+                        </div>
+                      </div>
+                    </div>
+                      
+                  </div>
+            
+                @if(Auth::user()->role_id == 1)
+                    <!-- Mostrar esto si el usuario está autenticado -->
+                    <a href="{{route('dashboard')}}" @if($navindex=='2')class="active"@endif >Dashboard</a>
                 @endif
+                  <a href="{{ route('clases') }}">Mis cursos</a>
 
-                <li>
-                    <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit">Cerrar sesión</button>
-                    </form>
-                </li>
+    
+                
             @endguest
+
+            <a href="{{route('index')}}" @if($navindex=='1')class="active"@endif aria-current="page">Todos los Cursos</a>
           </div>
         </div>
       </div>
@@ -84,6 +104,8 @@
 
 
 <script>
+
+
         //Visual
         const darkModeButton = document.getElementById("darkModeToggle");
         const darkModeIndicator = document.getElementById("darkModeIndicator");

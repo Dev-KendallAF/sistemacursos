@@ -4,14 +4,7 @@
 
 
 
-body
-{
-  &h1
-  {
-    @apply text-lg text-cyan-200;
-    
-  }
-}
+
 /*Formularios*/
 
 
@@ -75,19 +68,7 @@ input
 }
 
 
-.navlink a
-{ 
-        @apply rounded-md px-3 py-2 text-sm font-medium ;
-        &:hover{@apply underline underline-offset-8 text-indigo-500 trs}
-        &.active
-        {
-            
-            @apply bg-indigo-500 text-white rounded-md px-3 py-2 text-sm font-medium shadow-md shadow-indigo-500/50;
-            &:hover{text-decoration: none; @apply bg-indigo-400 trs}
-            
-        }
-        
-}
+
 .trs
 {
     transition: all ease-in-out 0.3s;
@@ -105,6 +86,6 @@ input
     @apply block text-sm text-red-500 pb-6 ;
   }
 }
-
+@import 'navbar';
 @import 'sidebar';
 @import 'components/dropdown';

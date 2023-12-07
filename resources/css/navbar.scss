@@ -1,0 +1,35 @@
+.navbar
+{
+  &__link a
+  { 
+    @apply rounded-md px-3 py-2 text-sm font-medium ;
+    &:hover{@apply underline underline-offset-8 text-indigo-500 trs}
+    &.active
+    {
+        
+        @apply bg-indigo-500 text-white rounded-md px-3 py-2 text-sm font-medium shadow-md shadow-indigo-500/50;
+        &:hover{text-decoration: none; @apply bg-indigo-400 trs}
+        
+    }
+  }
+  &__footer
+ {
+  @apply absolute bottom-0 left-0 w-full h-2/6;
+  &--content
+  {
+    @apply rounded-lg bg-white dark:bg-indigo-400 p-5 shadow-lg dark:shadow-indigo-400/50 ;
+  }
+
+ }
+ &__porfile
+ {
+  @apply flex items-center gap-4 dark:text-black font-semibold;
+  &--image
+  {
+  @apply inline w-10 h-10 content-center rounded-full ;
+  }
+ }
+
+}
+
+

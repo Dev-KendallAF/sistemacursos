@@ -10,8 +10,10 @@ Route::controller(PersonaController::class)->group(
     {
         $ruta = "persona";
         Route::get("$ruta/", 'index')->name("$ruta.index");
-        Route::post("$ruta", 'store')->name("$ruta.store");
-        Route::post("$ruta", 'login')->name("user.login");
+        Route::post("$ruta", 'store')->name("persona.store");
+        Route::post("$ruta/login", 'login')->name("user.login");
+        Route::get("$ruta/logout", 'logout')->name("user.logout");
+
 
         //Route::get("$ruta/create", 'create');
         //Route::get("$ruta/edit/{id}", 'edit')->where('id','[0-9]+');
@@ -36,6 +38,14 @@ Route::get('/login', function () {
     return view('login');
 })->name('login');
 
-Route::get('/admin', function () {
+Route::get('/admin/dashboard', function () {
     return view('Admin/index');
-})->name('admin');
+})->name('dashboard');
+
+Route::get('/teacher/subjects', function () {
+    return view('Teacher/index');
+})->name('clases');
+
+Route::get('/user/perfil', function () {
+    return view('perfil');
+})->name('perfil');
