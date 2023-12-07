@@ -1,0 +1,18 @@
+.historyLink
+{
+  @apply block rounded-lg bg-white dark:bg-gray-800 p-5 shadow-lg  py-10;
+  &>a
+  {
+    @apply text-sm dark:text-white transition ease-in-out;
+    &.active
+    {
+      @apply text-indigo-400 dark:text-cyan-300 font-bold;
+  
+    }
+  }
+  &>h1
+  {
+    @apply text-5xl mt-3 dark:text-white font-bold; 
+  }
+
+}

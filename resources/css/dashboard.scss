@@ -1,0 +1,123 @@
+.dashboard
+{
+  &__content
+  {
+    @apply p-10;
+  }
+  &__table
+  {
+    @apply my-10 block rounded-lg bg-white dark:bg-gray-800 dark:text-white p-5 shadow-lg dark:shadow-gray-700/30 ;
+
+    #table_length{ @apply text-end mb-5 md:text-start md:mb-0 md:mt-3 md:absolute flex justify-center;}
+    #table_filter{ @apply text-center md:text-end  md:flex md:justify-end ;}
+    label{@apply inline;}
+    input
+    {
+      @apply inline md:w-44 mx-3 font-normal;
+    }
+    select
+    {
+      @apply inline mx-3 px-3 rounded-md border-0 py-2   mb-5 font-normal text-gray-900 border-blue-500  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6;;
+      outline: none;
+    }
+    table
+    {
+      table-layout: fixed;
+      @apply rounded-lg shadow-xl w-full ;
+      thead
+      {
+        tr
+        {
+          @apply text-sm  ;
+          border-bottom: 1px solid #ccc;
+          th{@apply py-3}
+        }
+      }
+      tbody
+      {
+        tr 
+        {
+         
+          @apply bg-gray-50 md:bg-white md:hover:bg-gray-50 md:dark:hover:bg-indigo-950 dark:bg-gray-700 rounded-lg text-sm text-center;
+          td
+          {
+            overflow-x: auto; 
+           
+           &::-webkit-scrollbar {
+              width: 5px;    
+              height: 6px;
+            }
+          &::-webkit-scrollbar-thumb {
+            background: #cfcfcf;
+            border-radius: 2px;
+          }
+        
+          }  
+        }
+        
+      }
+    }
+    .action
+    {
+      >a
+      {
+        i
+        {
+          @apply rounded-lg p-3 md:p-2 md:m-2 border border-gray-400;
+          transition: all ease-in 0.5s; 
+        }
+        &:hover
+        {
+          i
+          {
+          @apply dark:bg-indigo-400 bg-gray-50 ;
+
+            @apply bg-gradient-to-r from-cyan-300 via-purple-500 to-pink-500  ;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width:650px) 
+{
+  .dashboard
+  {
+    &__table
+    {
+      table
+      {
+        thead
+        {
+          display: none;
+        }
+        tbody tr td{
+         width: 100% !important;
+
+        }
+        tr
+        {
+          @apply block m-5;
+        }
+        th,td
+        {
+          @apply text-sm block text-end  p-2 hover:bg-gray-100 dark:hover:bg-indigo-950;
+          border-bottom: 1px solid #cccccc8d;
+          &:last-child
+          {
+            border:none;
+          }
+          &::before
+          {
+            content: attr(data-label);
+            font-weight: bold;
+            float: left;
+          }
+        }
+        
+      }
+  
+    }
+  }
+}

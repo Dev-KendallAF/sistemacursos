@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
 
 class TeacherController extends Controller
 {
@@ -23,7 +24,7 @@ class TeacherController extends Controller
             $profesores = User::join('personas', 'users.persona_id', '=', 'personas.id')
             ->where('users.role_id', 2)
             ->select('users.*', 'personas.*')
-            ->get();
+            ->paginate(10);
 
             return view('Teacher/index',compact('profesores'));
     }

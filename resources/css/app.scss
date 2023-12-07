@@ -86,6 +86,9 @@ input
     @apply block text-sm text-red-500 pb-6 ;
   }
 }
+
+@import 'dashboard';
 @import 'navbar';
 @import 'sidebar';
+@import 'components/history';
 @import 'components/dropdown';

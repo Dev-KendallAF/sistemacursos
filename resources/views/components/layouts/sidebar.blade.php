@@ -127,7 +127,7 @@
 
 
 <!-- Contenido principal -->
-<div class="md:ml-64 ">
+<div class="dashboard__content md:ml-64 ">
     {{$content}}
 </div>
 

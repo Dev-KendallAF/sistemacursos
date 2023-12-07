@@ -10,8 +10,9 @@
         
     </head>
     <body class="bg-gray-50 dark:bg-gray-900">
-      <x-layouts.sidebar sidebarIndex='{{$index}}' nombreEmpresa="Cursos.CR" content={{$content}}/>
-     
+      <x-layouts.sidebar sidebarIndex='{{$index}}' nombreEmpresa="Cursos.CR" >
+      <x-slot name="content">{!! $content !!}</x-slot>
+      </x-layouts.sidebar>
 
     </body>
     
