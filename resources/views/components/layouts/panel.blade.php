@@ -10,8 +10,8 @@
         
     </head>
     <body class="bg-gray-50 dark:bg-gray-900">
-      <x-layouts.sidebar index="1" nombreEmpresa="Cursos.CR" />
-      {{$content}}
+      <x-layouts.sidebar sidebarIndex='{{$index}}' nombreEmpresa="Cursos.CR" content={{$content}}/>
+     
 
     </body>
     

@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\PersonaController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\StudentController;
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -21,6 +24,40 @@ Route::controller(PersonaController::class)->group(
         //Route::get("$ruta/delete/{id}", 'delete');
 
     });
+
+    Route::controller(TeacherController::class)->group(
+        function()
+        {
+            $ruta = "admin/dashboard/teacher";
+            $name = "teacher";
+
+            Route::get("$ruta/", 'index')->name("$name.index");
+            Route::post("$ruta", 'store')->name("$name.store");
+            //Route::get("$ruta/create", 'create');
+            //Route::get("$ruta/edit/{id}", 'edit')->where('id','[0-9]+');
+            //Route::get("$ruta/show/{id}", 'show');
+            //Route::get("$ruta/delete/{id}", 'delete');
+    
+        });
+
+        Route::controller(StudentController::class)->group(
+            function()
+            {
+                $ruta = "admin/dashboard/student";
+                $name = "student";
+    
+                Route::get("$ruta/", 'index')->name("$name.index");
+                Route::post("$ruta", 'store')->name("$name.store");
+                //Route::get("$ruta/create", 'create');
+                //Route::get("$ruta/edit/{id}", 'edit')->where('id','[0-9]+');
+                //Route::get("$ruta/show/{id}", 'show');
+                //Route::get("$ruta/delete/{id}", 'delete');
+        
+            });
+    
+
+
+       
 
 Route::get('/', function () {
     return view('index');

@@ -17,8 +17,29 @@
   <!--Body Sidebar  -->
     <div class="sidebar__body">
         <ul>
+          <li class="sidebar__item ">
+            <a href="{{route('dashboard')}}" class="sidebar__link  @if($sidebarIndex=='1') sidebar__link--active @endif " >
+              <div class="sidebar__icon">
+                <i class="fa-solid fa-chart-pie"></i>
+              </div>
+              <div>
+                <p> Estadisticas </p>
+              </div>
+            </a>
+          </li>
+          <li class="sidebar__item ">
+            <a href="{{route('teacher.index')}}" class="sidebar__link  @if($sidebarIndex=='2') sidebar__link--active @endif " >
+              <div class="sidebar__icon">
+                <i class="fa-solid fa-chalkboard-user"></i>
+              </div>
+              <div>
+                <p> Profesores </p>
+              </div>
+            </a>
+          </li>
+
             <li class="sidebar__item">
-              <a href="#" class="sidebar__link sidebar__link--active">
+              <a href="#" class="sidebar__link  @if($sidebarIndex=='3') sidebar__link--active @endif">
                 <div class="sidebar__icon">
                   <i class="fa-solid fa-book"></i> 
                 </div>
@@ -27,19 +48,10 @@
                 </div>
               </a>
             </li>
-            <li class="sidebar__item">
-              <a href="#" class="sidebar__link ">
-                <div class="sidebar__icon">
-                  <i class="fa-solid fa-chalkboard-user"></i>
-                </div>
-                <div>
-                  <p> Profesores </p>
-                </div>
-              </a>
-            </li>
+
 
             <li class="sidebar__item">
-              <a href="#" class="sidebar__link ">
+              <a href="{{route('student.index')}}" class="sidebar__link  @if($sidebarIndex=='4') sidebar__link--active @endif">
                 <div class="sidebar__icon">
                   <i class="fa-solid fa-people-group"></i>
                 </div>
@@ -89,7 +101,7 @@
         <a href="#" class="text-gray-700 block px-4 py-1 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Modificar</a>
       </div>
       <div class="py-1" role="none">
-        <a href="#" class="text-gray-700 block px-4 py-1 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">Cerrar Sesi&oacute;n</a>
+        <a href="{{route('user.logout')}}" class="text-gray-700 block px-4 py-1 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">Cerrar Sesi&oacute;n</a>
       </div>
     </div>
 
@@ -116,9 +128,7 @@
 
 <!-- Contenido principal -->
 <div class="md:ml-64 ">
-    <!-- ... tu contenido ... -->
-    
-    <x-layouts.footer />
+    {{$content}}
 </div>
 
 <script>
