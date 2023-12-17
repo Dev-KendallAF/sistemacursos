@@ -19,6 +19,36 @@ import './utilities/maskInput';
 
 
 $(function() {
+    if($('#txt_password').length)
+    {
+       
+            const btnPassword = document.getElementById('btn-togglepassword');
+            let passwordVisible = false;
+    
+            btnPassword.addEventListener('click', function () {
+              passwordVisible = !passwordVisible;
+              const passwordInput = document.getElementById('txt_password');
+    
+              if (passwordVisible) {
+                // Muestra la contraseña
+                btnPassword.innerHTML = '<i class="fa-solid fa-eye"></i>';
+                btnPassword.classList.remove("_disable-btnPassword")
+                btnPassword.classList.add("_active-btnPassword")
+                // Cambia el tipo de input a texto para mostrar la contraseña
+                passwordInput.type = 'text';
+              } else {
+                // Oculta la contraseña
+                btnPassword.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+                btnPassword.classList.remove("_active-btnPassword")
+                btnPassword.classList.add("_disable-btnPassword")
+    
+                // Cambia el tipo de input a contraseña para ocultar la contraseña
+                passwordInput.type = 'password';
+              }
+            });
+          
+    }
+
     if ($('#table').length)
     {
         let table = new DataTable('#table',

@@ -143,7 +143,9 @@ class TeacherController extends Controller
      */
     public function show(Persona $persona)
     {
-        //
+        $email = User::find($persona->id)->email;
+
+        return view('Teacher/show',compact('persona','email'));
     }
 
     /**
@@ -151,16 +153,100 @@ class TeacherController extends Controller
      */
     public function edit(Persona $persona)
     {
-        //
+        $email = User::find($persona->id)->email;
+
+        return view('Teacher/edit',compact('persona','email'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Persona $persona)
-    {
-        //
-    }
+
+        /*public function update(Request $request, Persona $persona)
+        {
+            var_dump($persona);
+            $email = User::find($persona->id)->email;
+
+            // Validación de datos
+            $validator = Validator::make($request->all(), [
+                'nombreCompleto' => 'required|string',
+                'identificacion' => [
+                    'required',
+                    'string',
+                    Rule::unique('personas', 'identificacion')->ignore($persona->id),
+                ],
+                'fechaNacimiento' => 'required|date',
+                'email' => [
+                    'required',
+                    'email',
+                    Rule::unique('users', 'email')->ignore($email),
+                ],
+                'password' => 'required|min:6',
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+
+            // Actualización de campos diferentes en Persona() y User()
+            $persona->nombreCompleto = $request->nombreCompleto;
+            $persona->identificacion = $request->identificacion;
+            $persona->fechaNacimiento = $request->fechaNacimiento;
+            $persona->save();
+
+            // Actualización de campos en User()
+            $user = $persona->user;
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            $user->save();
+
+            // Redirección al index con mensaje de éxito
+            return redirect()->route('index')->with('success', 'Datos actualizados correctamente.');
+        }*/
+        public function update(Request $request,Persona $persona)
+        {
+           // Validación de datos
+            $validator = Validator::make($request->all(), [
+                'nombreCompleto' => 'required|string',
+                'identificacion' => [
+                    'required',
+                    'string',
+                    Rule::unique('personas', 'identificacion')->ignore($persona->id),
+                ],
+                'fechaNacimiento' => 'required|date',
+                'email' => [
+                    'required',
+                    'email',
+                    Rule::unique('users', 'email')->ignore($persona->id),
+                ],
+                'password' => 'required|min:6',
+            ]);
+
+
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+
+            // Actualización de campos diferentes en Persona() 
+            $persona->nombreCompleto = $request->nombreCompleto;
+            $persona->identificacion = $request->identificacion;
+            $persona->fechaNacimiento = $request->fechaNacimiento;
+            $persona->save();
+
+            $email = User::find($persona->id)->email;
+            $user = User::where('email', $email)->first();
+
+            // Actualización de campos en User()
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            $user->persona_id = $persona->id;
+            $user->role_id = 2;
+            $user->save();
+
+            // Redirección al index con mensaje de éxito
+            return redirect()->route('teacher.index')->with('success', 'Datos actualizados correctamente.');
+        }
+
 
     /**
      * Remove the specified resource from storage.

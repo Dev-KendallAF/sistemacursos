@@ -31,8 +31,8 @@
                       <td data-label="Email">{{ $p->email }}</td>
                       <td data-label="Fecha modificación">{{ $p->updated_at }}</td>
                       <td data-label="Acciones" class="action">
-                          <a href="{{ route('teacher.show', $p->id) }}"><i class="fa-solid fa-user-large"></i></a>
-                          <a href="{{ route('teacher.edit', $p->id) }}"><i class="fa-solid fa-user-pen"></i></a>
+                          <a href="{{ route('teacher.show', $p) }}"><i class="fa-solid fa-user-large"></i></a>
+                          <a href="{{ route('teacher.edit', $p) }}"><i class="fa-solid fa-user-pen"></i></a>
                       </td>
                   </tr>
               @endforeach

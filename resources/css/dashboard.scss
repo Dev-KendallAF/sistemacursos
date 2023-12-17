@@ -4,6 +4,37 @@
   {
     @apply p-10;
   }
+  &__porfile
+  {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-4;
+  }
+  &__photo
+  {
+    @apply my-10 hidden  md:block rounded-lg bg-white dark:bg-gray-800 dark:text-white p-5 shadow-lg dark:shadow-gray-700/30 ;
+    width: 100%; /* Tamaño deseado para el contenedor */
+    height: 300px; /* Tamaño deseado para el contenedor */
+    overflow: hidden;
+    &--image
+    {
+      width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
+      height: 100%; /* Asegura que la imagen ocupe todo el alto del contenedor */
+      object-fit: cover;
+    }
+  }
+  &__data
+  {
+    @apply md:col-span-2 my-10 block rounded-lg bg-white dark:bg-gray-800 dark:text-white p-5 shadow-lg dark:shadow-gray-700/30 ;
+    &>div
+    {
+      @apply my-3;
+      &>h2{ @apply font-semibold dark:text-cyan-300 inline;}
+      &>p{ @apply inline mb-5;}
+      &>input{ @apply inline mb-5;}
+
+    }
+    
+
+  }
   &__table
   {
     @apply my-10 block rounded-lg bg-white dark:bg-gray-800 dark:text-white p-5 shadow-lg dark:shadow-gray-700/30 ;

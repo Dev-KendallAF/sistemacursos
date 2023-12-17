@@ -33,8 +33,11 @@ Route::controller(PersonaController::class)->group(
 
             Route::get("$ruta/", 'index')->name("$name.index");
             Route::post("$ruta", 'store')->name("$name.store");
-            Route::post("$ruta/show/{persona}", 'show')->name("$name.show");
-            Route::post("$ruta/edit/{persona}", 'edit')->name("$name.edit");
+            Route::get("$ruta/{persona}/show", 'show')->name("$name.show");
+            Route::get("$ruta/{persona}/edit", 'edit')->name("$name.edit");
+            
+            Route::put("$ruta/{persona}", 'update')->name("$name.update");
+
 
             //Route::get("$ruta/create", 'create');
             //Route::get("$ruta/edit/{id}", 'edit')->where('id','[0-9]+');
