@@ -15,7 +15,7 @@ use Illuminate\Pagination\Paginator;
 
 class TeacherController extends Controller
 {
-        /**
+    /**
      * Display a listing of the resource.
      */
     public function index()
@@ -24,7 +24,7 @@ class TeacherController extends Controller
             $profesores = User::join('personas', 'users.persona_id', '=', 'personas.id')
             ->where('users.role_id', 2)
             ->select('users.*', 'personas.*')
-            ->paginate(10);
+            ->get();
 
             return view('Teacher/index',compact('profesores'));
     }
