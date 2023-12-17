@@ -85,7 +85,7 @@ class TeacherController extends Controller
      
          // Resto de tu lógica después de la creación del usuario
      
-         return redirect()->route('teacher.index')->with('success', $request->email);
+         return redirect()->route('teacher.index')->with('success', 'El profesor se ha creado correctamente, ingresa a cursos para asignarle un rubro.');
      }
 
 
@@ -95,9 +95,12 @@ class TeacherController extends Controller
      */
     public function show(Persona $persona)
     {
+        
         $email = User::find($persona->id)->email;
+        $estado = User::find($persona->id)->estado;
 
-        return view('Teacher/show',compact('persona','email'));
+
+        return view('Teacher/show',compact('persona','email','estado'));
     }
 
     /**
@@ -106,8 +109,10 @@ class TeacherController extends Controller
     public function edit(Persona $persona)
     {
         $email = User::find($persona->id)->email;
+        $estado = User::find($persona->id)->estado;
+        
 
-        return view('Teacher/edit',compact('persona','email'));
+        return view('Teacher/edit',compact('persona','email','estado'));
     }
 
     /**
@@ -152,6 +157,7 @@ class TeacherController extends Controller
             $user->password = bcrypt($request->password);
             $user->persona_id = $persona->id;
             $user->role_id = 2;
+            $user->estado = $request->estado;
             $user->save();
 
             // Redirección al index con mensaje de éxito

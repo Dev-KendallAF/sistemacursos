@@ -11,6 +11,8 @@ setTimeout(()=>
 },1000)
 import './utilities/dropdown';
 import './utilities/maskInput';
+import './utilities/switch';
+
 
 
  

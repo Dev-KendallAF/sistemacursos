@@ -34,6 +34,8 @@
                   <th>Identificación</th>
                   <th>Email</th>
                   <th>Fecha modificación</th>
+                  <th>Estado</th>
+
                   <th>Acciones</th>
               </tr>
           </thead>
@@ -45,7 +47,10 @@
                       <td data-label="Identificación">{{ $p->identificacion }}</td>
                       <td data-label="Email">{{ $p->email }}</td>
                       <td data-label="Fecha modificación">{{ $p->updated_at }}</td>
-                      <td data-label="Acciones" class="action">
+                      <td data-label="Estado" class="estado {{ $p->estado == 1 ? 'estado__activo' : 'estado__inactivo' }}">
+                        {{ $p->estado == 1 ? 'Activo' : 'Inactivo' }}
+                    </td>
+                                          <td data-label="Acciones" class="action">
                           <a href="{{ route('teacher.show', $p) }}"><i class="fa-solid fa-user-large"></i></a>
                           <a href="{{ route('teacher.edit', $p) }}"><i class="fa-solid fa-user-pen"></i></a>
                       </td>

@@ -7,6 +7,50 @@
 
 /*Formularios*/
 
+.no-tailwind-styles {
+  all: initial !important;
+}
+
+.switch
+{
+  &>p{ @apply block text-gray-700 text-sm font-bold mb-2 dark:text-indigo-500 cursor-default;}
+  &__items
+  {
+    @apply flex items-center;
+    label{@apply flex items-center cursor-pointer ;}
+    input{@apply sr-only;}
+    
+  }
+  &__background
+    {
+      @apply block bg-gray-600 w-14 h-8 rounded-full
+    }
+  &__check
+  {
+    @apply  absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition;
+  }
+  &__label
+  {
+    @apply ml-3 font-semibold text-sm text-gray-500;
+  }
+  &.active
+  {
+    .switch__background
+    {
+      @apply  bg-cyan-600;
+    }
+    .switch__check
+    {
+      @apply   left-7 top-1 ;
+    }
+    .switch__label
+    {
+      @apply  text-cyan-600;
+    }
+  }
+
+
+}
 
 label
 {

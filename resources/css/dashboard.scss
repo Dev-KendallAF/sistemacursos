@@ -28,8 +28,24 @@
     {
       @apply my-3;
       &>h2{ @apply font-semibold dark:text-cyan-300 inline;}
-      &>p{ @apply inline mb-5;}
+      &>p
+      { @apply inline mb-5;
+        &.estado
+        {
+          @apply font-semibold text-sm cursor-pointer transition ease-in rounded-lg m-2 inline-block p-2 shadow-md text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800;
+          &__activo
+          {
+            @apply  bg-cyan-500  shadow-cyan-500/50 hover:bg-cyan-600 ;
+          }
+          &__inactivo
+          {
+            @apply  bg-red-500  shadow-red-500/50 hover:bg-red-600 ;
+
+          }
+        }
+      }
       &>input{ @apply inline mb-5;}
+      
 
     }
     
@@ -69,9 +85,22 @@
         tr 
         {
          
-          @apply bg-gray-50 md:bg-white md:hover:bg-gray-50 md:dark:hover:bg-indigo-950 dark:bg-gray-700 rounded-lg text-sm text-center;
+          @apply bg-gray-50 md:bg-white  md:hover:bg-gray-50 md:dark:hover:bg-indigo-950 dark:bg-gray-700 rounded-lg text-sm text-center;
           td
           {
+            &.estado
+            {
+              @apply font-semibold text-sm cursor-pointer transition ease-in rounded-lg my-2 inline-block p-2 shadow-md text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800;
+              &__activo
+              {
+                @apply  bg-cyan-500  shadow-cyan-500/50 hover:bg-cyan-600 ;
+              }
+              &__inactivo
+              {
+                @apply  bg-red-500  shadow-red-500/50 hover:bg-red-600 ;
+
+              }
+            }
             overflow-x: auto; 
            
            &::-webkit-scrollbar {

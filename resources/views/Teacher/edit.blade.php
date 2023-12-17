@@ -56,32 +56,48 @@
               @enderror
             </div>
             </div>
-          
 
-            <!-- Email -->
-            <div class="form-group @error('email') invalid @enderror">
-            <label for="txt_email" class="dark:text-indigo-500"> <i class="fa-regular fa-envelope text-indigo-600"></i> Correo electrónico </label>
-            <input type="text" id="txt-email" name="email" placeholder="estudiante@cursos.cr" autocomplete="off" value="{{ $errors->any() ? old('email') : $email }}">
-            @error('email')
-            <span class="message__error"><i class="fa-solid fa-circle-exclamation fa-fade"></i> {{$message}}</span>
-            @enderror
-          </div>
-          <div class="grid grid-cols-2 gap-4">
-          <!-- Password -->
-          <div class=" form-group @error('password') invalid @enderror">
-            <label for="txt_password" class="dark:text-indigo-500"><i class="fa-solid fa-lock text-indigo-600"></i> Contraseña</label>
-            <div class="relative mt-2 rounded-md shadow-sm">
-              <input type="password" name="password" id="txt_password"  placeholder="Ingresa tu contraseña" autocomplete="off">
-              <div class="absolute inset-y-0 right-0 flex items-center">
-                <button type="button" id="btn-togglepassword" class="_disable-btnPassword">
-                  <i class="fa-solid fa-eye-slash"></i>
-                </button>
+            <div class="grid grid-cols-2 gap-4">
+
+                <!-- Email -->
+                <div class="form-group @error('email') invalid @enderror">
+                <label for="txt_email" class="dark:text-indigo-500"> <i class="fa-regular fa-envelope text-indigo-600"></i> Correo electrónico </label>
+                <input type="text" id="txt-email" name="email" placeholder="estudiante@cursos.cr" autocomplete="off" value="{{ $errors->any() ? old('email') : $email }}">
+                @error('email')
+                <span class="message__error"><i class="fa-solid fa-circle-exclamation fa-fade"></i> {{$message}}</span>
+                @enderror
+              </div>
+              <!-- Password -->
+              <div class=" form-group @error('password') invalid @enderror">
+                <label for="txt_password" class="dark:text-indigo-500"><i class="fa-solid fa-lock text-indigo-600"></i> Contraseña</label>
+                <div class="relative mt-2 rounded-md shadow-sm">
+                  <input type="password" name="password" id="txt_password"  placeholder="Ingresa tu contraseña" autocomplete="off">
+                  <div class="absolute inset-y-0 right-0 flex items-center">
+                    <button type="button" id="btn-togglepassword" class="_disable-btnPassword">
+                      <i class="fa-solid fa-eye-slash"></i>
+                    </button>
+                  </div>
+                </div>
+                @error('password')
+                <span class="message__error"><i class="fa-solid fa-circle-exclamation fa-fade"></i> {{$message}}</span>
+                @enderror
               </div>
             </div>
-            @error('password')
-            <span class="message__error"><i class="fa-solid fa-circle-exclamation fa-fade"></i> {{$message}}</span>
-            @enderror
+          <div class="grid grid-cols-2 gap-4">
+
+          <!-- Estado -->
+          <div class="switch" id="switch_estado" data-estado="{{$estado}}">
+            <input type="text" name="estado" id="txt_estado" class="txt_estado" value="{{$estado}}">
+            <p class=""><i class="fa-solid fa-circle-check text-indigo-600"></i> Estado</p>
+              <div class="switch__items" id="switch__items">
+                    <div class="relative">
+                        <div class="switch__background"></div>
+                        <div class="switch__check"></div>
+                    </div>
+                    <div class="switch__label" id="lb_estado">Activo</div>
+            </div>
           </div>
+
 
             <!-- Telefono -->
             <div>

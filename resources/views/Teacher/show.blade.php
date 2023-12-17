@@ -49,6 +49,10 @@
             <p>{{$email}}</p>
           </div>
           <div>
+            <h2>Estado:</h2>
+            <p class="estado {{ $estado == 1 ? 'estado__activo' : 'estado__inactivo' }}"> {{ $estado == 1 ? 'Activo' : 'Inactivo' }}</p>
+          </div>
+          <div>
             <a href="{{route('teacher.edit', $persona->id) }}" class="text-sm font-semibold text-indigo-400 transition ease-in hover:underline hover:underline-offset-4"> Modificar profesor</a>
           </div>
         </div>
