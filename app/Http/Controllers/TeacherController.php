@@ -34,107 +34,59 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        
-    }
-
-    public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'nombreCompleto' => 'required|string',
-            'identificacion' => [
-                'required',
-                'string',
-                Rule::unique('personas', 'identificacion'),
-            ],
-            'fechaNacimiento' => 'required|date',
-            'email' => [
-                'required',
-                'email',
-                Rule::unique('users', 'email')->ignore($request->persona_id, 'persona_id'),
-            ],
-            'password' => 'required|min:6',
-        ]);
-    
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-    
-        $persona = Persona::create([
-            'nombreCompleto' => $request->nombreCompleto,
-            'identificacion' => $request->identificacion,
-            'fechaNacimiento' => $request->fechaNacimiento
-        ]);
-    
-        $user = User::create([
-            'email' => $request->email,
-            'password' => bcrypt($request->password), // Asegúrate de cifrar la contraseña
-            'persona_id' => $persona->id,
-            'role_id' => 3,
-        ]);
-    
-        // Resto de tu lógica después de la creación del usuario
-    
-        return redirect()->route('user.email')->with('email', $request->email);
+        return view('Teacher/create');
     }
 
 
-    public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-        
-        if (Auth::attempt($credentials)) {
-            // Autenticación exitosa
-    
-            $user = Auth::user();
-            $persona = Persona::find($user->persona_id);
-    
-            // Almacenar datos de Persona en la sesión
-            Session::put('persona', $persona);
-    
-            switch ($user->role_id) {
-                case 1:
-                    // Administrador
-                    return redirect()->route('dashboard');
-                    break;
-                case 2:
-                    // Profesor
-                    return redirect()->route('clases');
-                    break;
-                case 3:
-                    // Estudiante
-                    return redirect()->route('index');
-                    break;
-            }
-        }
-    
-        // La autenticación falló
-        $user = User::where('email', $request->email)->first();
-    
-        if (!$user) {
-            // El correo electrónico no está registrado
-            return redirect()->route('login')->withErrors(['email' => 'Correo electrónico no registrado']);
-        }
-    
-        if (!Hash::check($request->password, $user->password)) {
-            // La contraseña es incorrecta
-            return redirect()->route('login')->withErrors(['password' => 'Contraseña incorrecta']);
-        }
-    
-        return redirect()->route('login')->withErrors(['email' => 'Credenciales incorrectas']);
-    }
 
-    public function logout()
-    {
-        Auth::logout();
-        Session::flush();
-        return redirect()->route('index'); // Reemplaza 'home' con la ruta a la que deseas redirigir después de cerrar sesión
-    }
+
+
+
+
     
     /**
      * Store a newly created resource in storage.
      */
     
-
+     public function store(Request $request)
+     {
+         $validator = Validator::make($request->all(), [
+             'nombreCompleto' => 'required|string',
+             'identificacion' => [
+                 'required',
+                 'string',
+                 Rule::unique('personas', 'identificacion'),
+             ],
+             'fechaNacimiento' => 'required|date',
+             'email' => [
+                 'required',
+                 'email',
+                 Rule::unique('users', 'email')->ignore($request->persona_id, 'persona_id'),
+             ],
+             'password' => 'required|min:6',
+         ]);
+     
+         if ($validator->fails()) {
+             return redirect()->back()->withErrors($validator)->withInput();
+         }
+     
+         $persona = Persona::create([
+             'nombreCompleto' => $request->nombreCompleto,
+             'identificacion' => $request->identificacion,
+             'fechaNacimiento' => $request->fechaNacimiento
+         ]);
+     
+         $user = User::create([
+             'email' => $request->email,
+             'password' => bcrypt($request->password), // Asegúrate de cifrar la contraseña
+             'persona_id' => $persona->id,
+             'role_id' => 2,
+         ]);
+     
+         // Resto de tu lógica después de la creación del usuario
+     
+         return redirect()->route('teacher.index')->with('success', $request->email);
+     }
 
 
 
@@ -161,48 +113,7 @@ class TeacherController extends Controller
     /**
      * Update the specified resource in storage.
      */
-
-        /*public function update(Request $request, Persona $persona)
-        {
-            var_dump($persona);
-            $email = User::find($persona->id)->email;
-
-            // Validación de datos
-            $validator = Validator::make($request->all(), [
-                'nombreCompleto' => 'required|string',
-                'identificacion' => [
-                    'required',
-                    'string',
-                    Rule::unique('personas', 'identificacion')->ignore($persona->id),
-                ],
-                'fechaNacimiento' => 'required|date',
-                'email' => [
-                    'required',
-                    'email',
-                    Rule::unique('users', 'email')->ignore($email),
-                ],
-                'password' => 'required|min:6',
-            ]);
-
-            if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput();
-            }
-
-            // Actualización de campos diferentes en Persona() y User()
-            $persona->nombreCompleto = $request->nombreCompleto;
-            $persona->identificacion = $request->identificacion;
-            $persona->fechaNacimiento = $request->fechaNacimiento;
-            $persona->save();
-
-            // Actualización de campos en User()
-            $user = $persona->user;
-            $user->email = $request->email;
-            $user->password = bcrypt($request->password);
-            $user->save();
-
-            // Redirección al index con mensaje de éxito
-            return redirect()->route('index')->with('success', 'Datos actualizados correctamente.');
-        }*/
+    
         public function update(Request $request,Persona $persona)
         {
            // Validación de datos

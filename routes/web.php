@@ -32,6 +32,8 @@ Route::controller(PersonaController::class)->group(
             $name = "teacher";
 
             Route::get("$ruta/", 'index')->name("$name.index");
+            Route::get("$ruta/create", 'create')->name("$name.create");
+
             Route::post("$ruta", 'store')->name("$name.store");
             Route::get("$ruta/{persona}/show", 'show')->name("$name.show");
             Route::get("$ruta/{persona}/edit", 'edit')->name("$name.edit");
