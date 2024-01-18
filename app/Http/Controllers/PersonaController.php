@@ -31,6 +31,24 @@ class PersonaController extends Controller
         
     }
 
+    public function perfil()
+    {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+    
+        $user = Auth::user();
+        $persona = Persona::find($user->persona_id);
+        $email = User::find($persona->id)->email;
+        
+        if (!isset($persona)) {
+            // La variable $persona no está definida o es null
+            abort(404);
+        }
+    
+        return view('profile', compact('persona','email'));
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -143,17 +161,86 @@ class PersonaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Persona $persona)
+    public function edit()
     {
-        //
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+    
+        $user = Auth::user();
+        $persona = Persona::find($user->persona_id);
+        $email = User::find($persona->id)->email;
+        
+        if (!isset($persona)) {
+            // La variable $persona no está definida o es null
+            abort(404);
+        }
+        
+
+        return view('profileEdit', compact('persona','email'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Persona $persona)
+    public function update(Request $request)
     {
-        //
+
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+    
+        $user = Auth::user();
+        $persona = Persona::find($user->persona_id);
+        $email = User::find($persona->id)->email;
+        
+        if (!isset($persona)) {
+            // La variable $persona no está definida o es null
+            abort(404);
+        }
+        
+        // Validación de datos
+        $validator = Validator::make($request->all(), [
+            'nombreCompleto' => 'required|string',
+            'identificacion' => [
+                'required',
+                'string',
+                Rule::unique('personas', 'identificacion')->ignore($persona->id),
+            ],
+            'fechaNacimiento' => 'required|date',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users', 'email')->ignore($persona->id),
+            ]
+        ]);
+
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Actualización de campos diferentes en Persona() 
+        $persona->nombreCompleto = $request->nombreCompleto;
+        $persona->identificacion = $request->identificacion;
+        $persona->fechaNacimiento = $request->fechaNacimiento;
+        $persona->save();
+
+        $email = User::find($persona->id)->email;
+        $rol = User::find($persona->id)->rol;
+
+        $user = User::where('email', $email)->first();
+
+        // Actualización de campos en User()
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->persona_id = $persona->id;
+
+        
+        $user->save();
+
+        // Redirección al index con mensaje de éxito
+        return redirect()->route('user.perfil')->with('success', 'Datos actualizados correctamente.');
     }
 
     /**

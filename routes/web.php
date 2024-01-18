@@ -16,6 +16,11 @@ Route::controller(PersonaController::class)->group(
         Route::post("$ruta", 'store')->name("persona.store");
         Route::post("$ruta/login", 'login')->name("user.login");
         Route::get("$ruta/logout", 'logout')->name("user.logout");
+        Route::get("user/perfil", 'perfil')->name("user.perfil");
+        Route::get("user/perfil/edit", 'edit')->name("user.edit");
+        Route::put("user/perfil/edit", 'update')->name("user.update");
+        
+
 
 
         //Route::get("$ruta/create", 'create');
@@ -85,6 +90,8 @@ Route::get('/login', function () {
     return view('login');
 })->name('login');
 
+
+
 Route::get('/admin/dashboard', function () {
     return view('Admin/index');
 })->name('dashboard');
@@ -93,6 +100,3 @@ Route::get('/teacher/subjects', function () {
     return view('Teacher/index');
 })->name('clases');
 
-Route::get('/user/perfil', function () {
-    return view('perfil');
-})->name('perfil');

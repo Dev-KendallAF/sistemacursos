@@ -97,8 +97,8 @@
 
     <div class="dropdown__menu hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
       <div class="py-1" role="none">
-        <a href="#" class="" role="menuitem" tabindex="-1" id="menu-item-0">Ver Perfil</a>
-        <a href="#" class="text-gray-700 block px-4 py-1 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Modificar</a>
+        <a href="{{route('user.perfil')}}" class="" role="menuitem" tabindex="-1" id="menu-item-0">Ver Perfil</a>
+        <a href="{{route('user.edit') }}" class="text-gray-700 block px-4 py-1 text-sm" role="menuitem" tabindex="-1" id="menu-item-1">Modificar</a>
       </div>
       <div class="py-1" role="none">
         <a href="{{route('user.logout')}}" class="text-gray-700 block px-4 py-1 text-sm" role="menuitem" tabindex="-1" id="menu-item-2">Cerrar Sesi&oacute;n</a>

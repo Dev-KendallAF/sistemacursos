@@ -116,7 +116,7 @@
           </div>
           <div class="grid items-center">
             <button type="submit" class="rounded-xl bg-indigo-600 w-100 my-2 p-2  shadow-md shadow-indigo-500/50 text-white  ">
-              Ingresar
+              Realizar Cambios
             </button>
           </div>
           </div>
