@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\StudentController;
@@ -53,6 +54,28 @@ Route::controller(PersonaController::class)->group(
     
         });
 
+        Route::controller(CategoriaController::class)->group(
+            function()
+            {
+                $ruta = "admin/dashboard/categoria";
+                $name = "categoria";
+    
+                Route::get("$ruta/", 'index')->name("$name.index");
+                Route::get("$ruta/create", 'create')->name("$name.create");
+    
+                Route::post("$ruta", 'store')->name("$name.store");
+                Route::get("$ruta/{persona}/show", 'show')->name("$name.show");
+                Route::get("$ruta/{persona}/edit", 'edit')->name("$name.edit");
+                
+                Route::put("$ruta/{persona}", 'update')->name("$name.update");
+    
+    
+                //Route::get("$ruta/create", 'create');
+                //Route::get("$ruta/edit/{id}", 'edit')->where('id','[0-9]+');
+                //Route::get("$ruta/show/{id}", 'show');
+                //Route::get("$ruta/delete/{id}", 'delete');
+        
+            });
         Route::controller(StudentController::class)->group(
             function()
             {

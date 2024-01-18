@@ -61,7 +61,7 @@
               </a>
             </li>
             <li class="sidebar__item">
-              <a href="#" class="sidebar__link ">
+              <a href="{{route('categoria.index')}}" class="sidebar__link  @if($sidebarIndex=='5') sidebar__link--active @endif">
                 <div class="sidebar__icon">
                   <i class="fa-solid fa-book-open"></i>
                 </div>
