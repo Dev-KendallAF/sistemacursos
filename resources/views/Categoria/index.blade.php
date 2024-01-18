@@ -1,4 +1,4 @@
-@php $hName='categorias' @endphp
+@php $hName='Categorias' @endphp
 
 <x-layouts.panel  headerName="{{$hName}}" index='5'>
   <x-slot name="content">

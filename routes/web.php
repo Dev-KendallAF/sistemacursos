@@ -64,10 +64,10 @@ Route::controller(PersonaController::class)->group(
                 Route::get("$ruta/create", 'create')->name("$name.create");
     
                 Route::post("$ruta", 'store')->name("$name.store");
-                Route::get("$ruta/{persona}/show", 'show')->name("$name.show");
-                Route::get("$ruta/{persona}/edit", 'edit')->name("$name.edit");
+                Route::get("$ruta/{categoria}/show", 'show')->name("$name.show");
+                Route::get("$ruta/{categoria}/edit", 'edit')->name("$name.edit");
                 
-                Route::put("$ruta/{persona}", 'update')->name("$name.update");
+                Route::put("$ruta/{categoria}", 'update')->name("$name.update");
     
     
                 //Route::get("$ruta/create", 'create');

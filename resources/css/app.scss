@@ -27,7 +27,7 @@
     }
   &__check
   {
-    @apply  absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition;
+    @apply  absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition cursor-pointer;
   }
   &__label
   {
@@ -37,15 +37,15 @@
   {
     .switch__background
     {
-      @apply  bg-cyan-600;
+      @apply  bg-cyan-600 ;
     }
     .switch__check
     {
-      @apply   left-7 top-1 ;
+      @apply   left-7 top-1  ;
     }
     .switch__label
     {
-      @apply  text-cyan-600;
+      @apply  text-cyan-600 ;
     }
   }
 

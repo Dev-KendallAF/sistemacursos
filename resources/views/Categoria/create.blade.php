@@ -1,103 +1,41 @@
-<x-layouts.panel  headerName="Estudiantes" index='4'>
+<x-layouts.panel  headerName="Estudiantes" index='5'>
   <x-slot name="content">
     <div class="continer mx-auto ">
       <!--history-->
       <div class="historyLink">
-        <a href="{{route('student.index')}}" >Estudiantes /</a>
+        <a href="{{route('categoria.index')}}" >Categorias /</a>
         <a href="#" class="active" >Nuevo</a>
 
 
         
-        <h1>Crear Estudiante</h1>
+        <h1>Crear Categoría</h1>
       </div>
       
       <!--data-->
-      <div class="dashboard__porfile">
-        <div class="dashboard__photo">
-          <img src="https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg"   class="dashboard__photo--image">  
-          
-        </div>
+      <div class="">
+     
         <div class="dashboard__data">
           <div>
-            <a href="{{route('student.index')}}"><i class="fa-solid fa-circle-chevron-left mx-2 pb-2 fa-lg text-indigo-600"></i></a>
+            <a href="{{route('categoria.index')}}"><i class="fa-solid fa-circle-chevron-left mx-2 pb-2 fa-lg text-indigo-600"></i></a>
             <h1 class="inline text-2xl font-bold text-indigo-600" >Regresar</h1>
           </div>
           <hr class="my-3">
 
-          <form action="{{route('student.store') }}" method="POST">
+          <form action="{{route('categoria.store') }}" method="POST">
             @csrf
-            <!--NombreCompleto-->
-            <div class="form-group @error('nombreCompleto') invalid @enderror">
-              <label for="txt_nombre" class=" dark:text-indigo-500 error:border-red-500  "> <i class="fa-regular fa-user text-indigo-600 "></i> Nombre Completo</label>
-              <input type="text" name="nombreCompleto" id="txt_nombre" mask="char" placeholder="Ingresa el nombre completo"  value="{{old('nombreCompleto')}}" autocomplete="off" >
-              @error('nombreCompleto')
+            <!--nombre-->
+            <div class="form-group @error('nombre') invalid @enderror">
+              <label for="txt_nombre" class=" dark:text-indigo-500 error:border-red-500  "> <i class="fa-regular fa-user text-indigo-600 "></i> Nombre Categoría</label>
+              <input type="text" name="nombre" id="txt_nombre" mask="char" placeholder="Ingresa el nombre de la categoría"  value="{{old('nombre')}}" autocomplete="off" >
+              @error('nombre')
               <span class="message__error"><i class="fa-solid fa-circle-exclamation fa-fade"></i> {{$message}}</span>
               @enderror
             </div>
-            <div class="grid grid-cols-2 gap-4">
-            <!-- Identificacion-->
-            <div class="form-group @error('identificacion') invalid @enderror">
-              <label for="txt_cedula" class=" dark:text-indigo-500"> <i class="fa-regular fa-address-card text-indigo-600"></i> Identificaci&oacute;n</label>
-              <input type="text" name="identificacion" id="txt_cedula" class="" mask='dni' placeholder="_ ____ ___"  autocomplete="off" value="{{old('identificacion')}}">
-              @error('identificacion')
-              <span class="message__error"><i class="fa-solid fa-circle-exclamation fa-fade"></i> {{$message}}</span>
-              @enderror
-            </div>
-
-            <!-- Fecha Nacimiento-->
-            <div class="form-group  @error('fechaNacimiento') invalid @enderror">
-              <label for="txt_fechaNaciento" class=" dark:text-indigo-500"> <i class="fa-solid fa-cake-candles text-indigo-600"></i> Fecha Nacimiento</label>
-              <input type="date" name="fechaNacimiento" id="txt_fechaNaciento"  max = "@php echo date("Y-m-d",strtotime(date("Y-m-d")."- 10 years"));@endphp" value="{{old('fechaNacimiento')}}">
-              @error('fechaNacimiento')
-              <span class="message__error"><i class="fa-solid fa-circle-exclamation fa-fade"></i> {{$message}}</span>
-              @enderror
-            </div>
-            </div>
-          
-
-            <!-- Email -->
-            <div class="form-group @error('email') invalid @enderror">
-            <label for="txt_email" class="dark:text-indigo-500"> <i class="fa-regular fa-envelope text-indigo-600"></i> Correo electrónico </label>
-            <input type="text" id="txt-email" name="email" placeholder="estudiante@cursos.cr" autocomplete="off" value="{{old('email')}}">
-            @error('email')
-            <span class="message__error"><i class="fa-solid fa-circle-exclamation fa-fade"></i> {{$message}}</span>
-            @enderror
-          </div>
-          <div class="grid grid-cols-2 gap-4">
-          <!-- Password -->
-          <div class=" form-group @error('password') invalid @enderror">
-            <label for="txt_password" class="dark:text-indigo-500"><i class="fa-solid fa-lock text-indigo-600"></i> Contraseña</label>
-            <div class="relative mt-2 rounded-md shadow-sm">
-              <input type="password" name="password" id="txt_password"  placeholder="Ingresa tu contraseña" autocomplete="off">
-              <div class="absolute inset-y-0 right-0 flex items-center">
-                <button type="button" id="btn-togglepassword" class="_disable-btnPassword">
-                  <i class="fa-solid fa-eye-slash"></i>
-                </button>
-              </div>
-            </div>
-            @error('password')
-            <span class="message__error"><i class="fa-solid fa-circle-exclamation fa-fade"></i> {{$message}}</span>
-            @enderror
-          </div>
-
-            <!-- Telefono -->
-            <div>
-            <label for="txt_telefono" class="dark:text-indigo-500"><i class="fa-solid fa-phone text-indigo-600"></i> Tel&eacute;fono <span class="text-indigo-400">(opcional)</span></label>
-            <div class="relative mt-2 rounded-md shadow-sm">
-              <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <span class="text-gray-500 sm:text-sm"><x-icons.flag /></span>
-              </div>
-              <input type="text" name="telefono" id="txt_telefono" mask='+5\06\ 0000-0000' autocomplete="off"  style="padding-left: 2.2rem !important; " placeholder="+506" value="{{old('telefono')}}">
-            </div>
-            @error('telefono')
-            <span class="message__error"><i class="fa-solid fa-circle-exclamation fa-fade"></i> {{$message}}</span>
-            @enderror
-            </div>
-  
+            <span class="text-gray-500 text-xs">Una vez que crees esta categoría puedes clasificar los cursos disponibles en este grupo</span>
           </div>
           <div class="grid items-center">
             <button type="submit" class="rounded-xl bg-indigo-600 w-100 my-2 p-2  shadow-md shadow-indigo-500/50 text-white  ">
-              Ingresar
+              Crear nuevo grupo
             </button>
           </div>
           </div>
