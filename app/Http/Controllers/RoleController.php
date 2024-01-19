@@ -4,62 +4,81 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
+
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+            // Obtener todos las roles
+            $roles = Role::all();
+
+            return view('role/index',compact('roles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('role/create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nombre' => [
+                'required',
+                'string',
+                Rule::unique('roles', 'nombre'),
+            ]
+        ]);
+    
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+    
+        $role = Role::create([
+            'nombre' => $request->nombre
+        ]);
+    
+    
+        return redirect()->route('role.index')->with('success', 'La Rol se ha creado correctamente, ahora puedes añadir cursos a este grupo.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Role $role)
+    public function show(role $role)
     {
-        //
+        
+        return view('role/show',compact('role'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Role $role)
+    public function edit(role $role)
     {
-        //
+        return view('role/edit',compact('role',));
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Role $role)
+    
+    public function update(Request $request,role $role)
     {
-        //
-    }
+        // Validación de datos
+        $validator = Validator::make($request->all(), [
+            
+            'nombre' => [
+                'required',
+                'string',
+                Rule::unique('roles', 'nombre')->ignore($role->id),
+            ]
+            ]);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Role $role)
-    {
-        //
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Actualización de campos diferentes en role() 
+        $role->nombre = $request->nombre;
+        $role->estado = $request->estado;
+        $role->save();
+
+        // Redirección al index con mensaje de éxito
+        return redirect()->route('role.index')->with('success', 'Datos actualizados correctamente.');
     }
 }

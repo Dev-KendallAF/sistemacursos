@@ -18,21 +18,12 @@ use Illuminate\Support\Facades\Session;
 
 class PersonaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
        return("Usuario registrado");
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        
-    }
     public function dashboard()
     {
         if (!Auth::check()) {
@@ -125,12 +116,10 @@ class PersonaController extends Controller
             'password' => bcrypt($request->password), // Asegúrate de cifrar la contraseña
             'persona_id' => $persona->id,
             'role_id' => 3,
-        ]);
-    
-        // Resto de tu lógica después de la creación del usuario
-    
+        ]);    
         return redirect()->route('user.email')->with('email', $request->email);
     }
+
     public function inicioSesion()
     {
         $user = Auth::user();
@@ -208,26 +197,7 @@ class PersonaController extends Controller
         Session::flush();
         return redirect()->route('index'); // Reemplaza 'home' con la ruta a la que deseas redirigir después de cerrar sesión
     }
-    
-    /**
-     * Store a newly created resource in storage.
-     */
-    
 
-
-
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Persona $persona)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit()
     {
         if (!Auth::check()) {
@@ -247,9 +217,6 @@ class PersonaController extends Controller
         return view('profileEdit', compact('persona','email'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request)
     {
 
@@ -301,20 +268,9 @@ class PersonaController extends Controller
         // Actualización de campos en User()
         $user->email = $request->email;
         $user->persona_id = $persona->id;
-
-
-        
         $user->save();
-
+        
         // Redirección al index con mensaje de éxito
         return redirect()->route('user.perfil')->with('success', 'Datos actualizados correctamente.');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Persona $persona)
-    {
-        //
     }
 }

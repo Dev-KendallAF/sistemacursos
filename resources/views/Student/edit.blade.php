@@ -87,7 +87,7 @@
 
           <!-- Estado -->
           <div class="switch" id="switch_estado" data-estado="{{$estado}}">
-            <input type="text" name="estado" id="txt_estado" class="txt_estado" value="{{$estado}}">
+            <input type="hidden" name="estado" id="txt_estado" class="txt_estado" value="{{$estado}}">
             <p class=""><i class="fa-solid fa-circle-check text-indigo-600"></i> Estado</p>
               <div class="switch__items" id="switch__items">
                     <div class="relative">
