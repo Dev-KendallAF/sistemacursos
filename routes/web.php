@@ -21,7 +21,7 @@ Route::controller(PersonaController::class)->group(
         Route::get("user/perfil/edit", 'edit')->name("user.edit");
         Route::put("user/perfil/edit", 'update')->name("user.update");
         
-
+        Route::get("admin/dashboard", 'dashboard')->name("dashboard");
 
 
         //Route::get("$ruta/create", 'create');
@@ -45,6 +45,8 @@ Route::controller(PersonaController::class)->group(
             Route::get("$ruta/{persona}/edit", 'edit')->name("$name.edit");
             
             Route::put("$ruta/{persona}", 'update')->name("$name.update");
+
+
 
 
             //Route::get("$ruta/create", 'create');
@@ -115,9 +117,6 @@ Route::get('/login', function () {
 
 
 
-Route::get('/admin/dashboard', function () {
-    return view('Admin/index');
-})->name('dashboard');
 
 Route::get('/teacher/subjects', function () {
     return view('Teacher/index');

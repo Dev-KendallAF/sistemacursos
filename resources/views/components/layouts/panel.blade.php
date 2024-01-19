@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{$headerName}}</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
         <script src="https://kit.fontawesome.com/eddade569a.js" crossorigin="anonymous"></script>
         @vite(['resources/css/app.scss','resources/js/app.js'])

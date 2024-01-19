@@ -3,6 +3,8 @@ import $ from "jquery";
 import DataTable from 'datatables.net-dt';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { Doughnut } from 'react-chartjs-2';
+
 
 setTimeout(()=>
 {

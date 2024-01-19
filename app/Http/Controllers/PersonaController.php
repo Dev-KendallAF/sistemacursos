@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Persona;
 use App\Models\User;
+use App\Models\Categoria;
+use App\Models\Curso;
+
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
@@ -29,6 +32,37 @@ class PersonaController extends Controller
     public function create()
     {
         
+    }
+    public function dashboard()
+    {
+        $inscripciones = [
+            'labels' => ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'],
+            'data' => [65, 59, 80, 81, 56],
+        ];
+        
+        $usuarios = User::all();
+        $categorias = Categoria::all();
+        $cursos = Curso::all();
+
+
+        $usersData = [
+            'labels' => ['Administradores', 'Profesores', 'Estudiantes'],
+            'data' => [
+                $usuarios->where('role_id', 1)->count(),
+                $usuarios->where('role_id', 2)->count(),
+                $usuarios->where('role_id', 3)->count(),
+            ],
+        ];
+
+        $cursosData = [
+            'labels' => $categorias->pluck('nombre')->toArray(),
+            'data' => $categorias->map(function ($categoria) {
+                return Curso::where('categoria_id', $categoria->id)->count();
+            })->toArray(),
+        ];
+
+        return view('Admin/index', compact('inscripciones','usersData','cursosData'));
+
     }
 
     public function perfil()

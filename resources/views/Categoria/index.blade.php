@@ -7,7 +7,7 @@
       <div class="historyLink">
         <a href="#" class="active">{{$hName}} /</a>
         
-        <h1><i class="fa-solid fa-chalkboard-user fa-xs"></i>
+        <h1><i class="fa-solid fa-book-open fa-xs"></i>
           {{$hName}}</h1>
 
           
