@@ -99,8 +99,11 @@ class StudentController extends Controller
         $email = User::find($persona->id)->email;
         $estado = User::find($persona->id)->estado;
 
+        if(User::find($persona->id)->role_id == 3)
+        {
+            return view('student/show',compact('persona','email','estado'));
+        }else  return redirect()->route('student.index');
 
-        return view('student/show',compact('persona','email','estado'));
     }
 
     /**
@@ -110,9 +113,12 @@ class StudentController extends Controller
     {
         $email = User::find($persona->id)->email;
         $estado = User::find($persona->id)->estado;
-        
 
-        return view('student/edit',compact('persona','email','estado'));
+        if(User::find($persona->id)->role_id == 3)
+        {
+            return view('student/edit',compact('persona','email','estado'));
+        }else  return redirect()->route('student.index');
+
     }
 
     /**

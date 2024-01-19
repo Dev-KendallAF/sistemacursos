@@ -22,13 +22,7 @@ Route::controller(PersonaController::class)->group(
         Route::put("user/perfil/edit", 'update')->name("user.update");
         
         Route::get("admin/dashboard", 'dashboard')->name("dashboard");
-
-
-        //Route::get("$ruta/create", 'create');
-        //Route::get("$ruta/edit/{id}", 'edit')->where('id','[0-9]+');
-        //Route::get("$ruta/show/{id}", 'show');
-        //Route::get("$ruta/delete/{id}", 'delete');
-
+        Route::get("/login", 'inicioSesion')->name("login");
     });
 
     Route::controller(TeacherController::class)->group(
@@ -45,15 +39,6 @@ Route::controller(PersonaController::class)->group(
             Route::get("$ruta/{persona}/edit", 'edit')->name("$name.edit");
             
             Route::put("$ruta/{persona}", 'update')->name("$name.update");
-
-
-
-
-            //Route::get("$ruta/create", 'create');
-            //Route::get("$ruta/edit/{id}", 'edit')->where('id','[0-9]+');
-            //Route::get("$ruta/show/{id}", 'show');
-            //Route::get("$ruta/delete/{id}", 'delete');
-    
         });
 
         Route::controller(CategoriaController::class)->group(
@@ -70,12 +55,6 @@ Route::controller(PersonaController::class)->group(
                 Route::get("$ruta/{categoria}/edit", 'edit')->name("$name.edit");
                 
                 Route::put("$ruta/{categoria}", 'update')->name("$name.update");
-    
-    
-                //Route::get("$ruta/create", 'create');
-                //Route::get("$ruta/edit/{id}", 'edit')->where('id','[0-9]+');
-                //Route::get("$ruta/show/{id}", 'show');
-                //Route::get("$ruta/delete/{id}", 'delete');
         
             });
         Route::controller(StudentController::class)->group(
@@ -107,13 +86,15 @@ Route::get('/user/confirm/EmailValidation', function () {
     return view('Validation/emailvalidation');
 })->name('user.email');
 
+Route::get('/user/Error', function () {
+    return view('Validation/errorAut');
+})->name('user.error');
+
 Route::get('/register', function () {
     return view('register');
 })->name('register');
 
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
+
 
 
 

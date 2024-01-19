@@ -35,33 +35,42 @@ class PersonaController extends Controller
     }
     public function dashboard()
     {
-        $inscripciones = [
-            'labels' => ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'],
-            'data' => [65, 59, 80, 81, 56],
-        ];
-        
-        $usuarios = User::all();
-        $categorias = Categoria::all();
-        $cursos = Curso::all();
-
-
-        $usersData = [
-            'labels' => ['Administradores', 'Profesores', 'Estudiantes'],
-            'data' => [
-                $usuarios->where('role_id', 1)->count(),
-                $usuarios->where('role_id', 2)->count(),
-                $usuarios->where('role_id', 3)->count(),
-            ],
-        ];
-
-        $cursosData = [
-            'labels' => $categorias->pluck('nombre')->toArray(),
-            'data' => $categorias->map(function ($categoria) {
-                return Curso::where('categoria_id', $categoria->id)->count();
-            })->toArray(),
-        ];
-
-        return view('Admin/index', compact('inscripciones','usersData','cursosData'));
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
+    
+        $user = Auth::user();
+        if($user->role_id == 1)
+        {
+            $inscripciones = [
+                'labels' => ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes'],
+                'data' => [65, 59, 80, 81, 56],
+            ];
+            
+            $usuarios = User::all();
+            $categorias = Categoria::all();
+            $cursos = Curso::all();
+    
+    
+            $usersData = [
+                'labels' => ['Administradores', 'Profesores', 'Estudiantes'],
+                'data' => [
+                    $usuarios->where('role_id', 1)->count(),
+                    $usuarios->where('role_id', 2)->count(),
+                    $usuarios->where('role_id', 3)->count(),
+                ],
+            ];
+    
+            $cursosData = [
+                'labels' => $categorias->pluck('nombre')->toArray(),
+                'data' => $categorias->map(function ($categoria) {
+                    return Curso::where('categoria_id', $categoria->id)->count();
+                })->toArray(),
+            ];
+    
+            return view('Admin/index', compact('inscripciones','usersData','cursosData'));
+        }else  return redirect()->route('index');
+ 
 
     }
 
@@ -122,7 +131,31 @@ class PersonaController extends Controller
     
         return redirect()->route('user.email')->with('email', $request->email);
     }
+    public function inicioSesion()
+    {
+        $user = Auth::user();
+        if ($user == null) {
+            return view('login');
+        }
+        else 
+        {
+            switch ($user->role_id) {
+                case 1:
+                    // Administrador
+                    return redirect()->route('dashboard');
+                    break;
+                case 2:
+                    // Profesor
+                    return redirect()->route('clases');
+                    break;
+                case 3:
+                    // Estudiante
+                    return redirect()->route('index');
+                    break;
+            }
+        }
 
+    }
 
     public function login(Request $request)
     {
@@ -267,8 +300,8 @@ class PersonaController extends Controller
 
         // Actualización de campos en User()
         $user->email = $request->email;
-        $user->password = bcrypt($request->password);
         $user->persona_id = $persona->id;
+
 
         
         $user->save();

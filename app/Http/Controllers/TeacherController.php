@@ -98,9 +98,11 @@ class TeacherController extends Controller
         
         $email = User::find($persona->id)->email;
         $estado = User::find($persona->id)->estado;
+        if(User::find($persona->id)->role_id == 2)
+        {
+            return view('Teacher/show',compact('persona','email','estado'));
+        }else  return redirect()->route('teacher.index');
 
-
-        return view('Teacher/show',compact('persona','email','estado'));
     }
 
     /**
@@ -111,8 +113,10 @@ class TeacherController extends Controller
         $email = User::find($persona->id)->email;
         $estado = User::find($persona->id)->estado;
         
-
-        return view('Teacher/edit',compact('persona','email','estado'));
+        if(User::find($persona->id)->role_id == 2)
+        {
+            return view('Teacher/edit',compact('persona','email','estado'));
+        }else  return redirect()->route('teacher.index');
     }
 
     /**
