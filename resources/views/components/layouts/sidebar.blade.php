@@ -39,7 +39,7 @@
           </li>
 
             <li class="sidebar__item">
-              <a href="#" class="sidebar__link  @if($sidebarIndex=='3') sidebar__link--active @endif">
+              <a href="{{route('curso.index')}}" class="sidebar__link  @if($sidebarIndex=='3') sidebar__link--active @endif">
                 <div class="sidebar__icon">
                   <i class="fa-solid fa-book"></i> 
                 </div>

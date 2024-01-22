@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\CursoController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\StudentController;
@@ -25,54 +26,64 @@ Route::controller(PersonaController::class)->group(
         Route::get("/login", 'inicioSesion')->name("login");
     });
 
-    Route::controller(TeacherController::class)->group(
-        function()
-        {
+
+    Route::middleware(['auth', 'CheckRole:1'])->group(function () {
+        Route::controller(TeacherController::class)->group(function () {
             $ruta = "admin/dashboard/teacher";
             $name = "teacher";
-
+    
             Route::get("$ruta/", 'index')->name("$name.index");
             Route::get("$ruta/create", 'create')->name("$name.create");
-
+    
             Route::post("$ruta", 'store')->name("$name.store");
             Route::get("$ruta/{persona}/show", 'show')->name("$name.show");
             Route::get("$ruta/{persona}/edit", 'edit')->name("$name.edit");
-            
+    
             Route::put("$ruta/{persona}", 'update')->name("$name.update");
         });
-
-        Route::controller(CategoriaController::class)->group(
-            function()
-            {
-                $ruta = "admin/dashboard/categoria";
-                $name = "categoria";
     
-                Route::get("$ruta/", 'index')->name("$name.index");
-                Route::get("$ruta/create", 'create')->name("$name.create");
+        Route::controller(CategoriaController::class)->group(function () {
+            $ruta = "admin/dashboard/categoria";
+            $name = "categoria";
     
-                Route::post("$ruta", 'store')->name("$name.store");
-                Route::get("$ruta/{categoria}/show", 'show')->name("$name.show");
-                Route::get("$ruta/{categoria}/edit", 'edit')->name("$name.edit");
-                
-                Route::put("$ruta/{categoria}", 'update')->name("$name.update");
-        
-            });
-        Route::controller(StudentController::class)->group(
-            function()
-            {
-                $ruta = "admin/dashboard/student";
-                $name = "student";
+            Route::get("$ruta/", 'index')->name("$name.index");
+            Route::get("$ruta/create", 'create')->name("$name.create");
     
-                Route::get("$ruta/", 'index')->name("$name.index");
-                Route::get("$ruta/create", 'create')->name("$name.create");
+            Route::post("$ruta", 'store')->name("$name.store");
+            Route::get("$ruta/{categoria}/show", 'show')->name("$name.show");
+            Route::get("$ruta/{categoria}/edit", 'edit')->name("$name.edit");
     
-                Route::post("$ruta", 'store')->name("$name.store");
-                Route::get("$ruta/{persona}/show", 'show')->name("$name.show");
-                Route::get("$ruta/{persona}/edit", 'edit')->name("$name.edit");
-                
-                Route::put("$ruta/{persona}", 'update')->name("$name.update");
-        
-            });
+            Route::put("$ruta/{categoria}", 'update')->name("$name.update");
+        });
+    
+        Route::controller(StudentController::class)->group(function () {
+            $ruta = "admin/dashboard/student";
+            $name = "student";
+    
+            Route::get("$ruta/", 'index')->name("$name.index");
+            Route::get("$ruta/create", 'create')->name("$name.create");
+    
+            Route::post("$ruta", 'store')->name("$name.store");
+            Route::get("$ruta/{persona}/show", 'show')->name("$name.show");
+            Route::get("$ruta/{persona}/edit", 'edit')->name("$name.edit");
+    
+            Route::put("$ruta/{persona}", 'update')->name("$name.update");
+        });
+    
+        Route::controller(CursoController::class)->group(function () {
+            $ruta = "admin/dashboard/curso";
+            $name = "curso";
+    
+            Route::get("$ruta/", 'index')->name("$name.index");
+            Route::get("$ruta/create", 'create')->name("$name.create");
+    
+            Route::post("$ruta", 'store')->name("$name.store");
+            Route::get("$ruta/{persona}/show", 'show')->name("$name.show");
+            Route::get("$ruta/{persona}/edit", 'edit')->name("$name.edit");
+    
+            Route::put("$ruta/{persona}", 'update')->name("$name.update");
+        });
+    });
     
 
 
