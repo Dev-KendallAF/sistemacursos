@@ -62,19 +62,33 @@ label
 
   }
 }
-input
+.count 
+{
+  display: flex !important;
+  justify-content: flex-end !important;
+  @apply  text-gray-700 text-sm font-bold mb-2 dark:text-indigo-500;
+  &.invalid
+  {
+  i{ @apply text-red-500; }
+    @apply block text-red-500 text-sm font-bold mb-2 ;
+
+  }
+}
+input,select,textarea
 {
   @apply block w-full rounded-md border-0 py-2 pl-7 pr-10 mb-5 text-gray-900 border-blue-500  ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6;
   outline: none;
-
+  
   &.invalid
   {
   
     @apply block w-full rounded-md border-0 py-2 pl-7 pr-10 mb-5 text-red-500 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6;
-
   }
 }
-
+select>option{
+  font-size: 0.8rem;
+}
+textarea{@apply mb-1;}
 ._disable-btnPassword
 {
   @apply h-full rounded-md text-center border-0 bg-transparent px-4 text-gray-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm;
@@ -88,6 +102,7 @@ input
 
 .form-group
 {
+
   &.invalid
   {
     label
@@ -95,9 +110,25 @@ input
       i{ @apply text-red-500; }
         @apply block text-red-500 text-sm font-bold mb-2 ;
     }
+    .count
+    {
+
+      i{ @apply text-red-500; }
+      @apply block text-red-500 text-sm font-bold mb-2 ;
+    }
     input
     {
         @apply block w-full rounded-md border-0 py-2 pl-7 pr-10 mb-1  border-red-500 ring-1 ring-inset ring-red-500 placeholder:text-red-400  focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6;
+    }
+    select
+    {
+      @apply block w-full rounded-md border-0 py-2 pl-7 pr-10 mb-1  border-red-500 ring-1 ring-inset ring-red-500 placeholder:text-red-400  focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6;
+
+    }
+    textarea
+    {
+      @apply block w-full rounded-md border-0 py-2 pl-7 pr-10 mb-1  border-red-500 ring-1 ring-inset ring-red-500 placeholder:text-red-400  focus:ring-inset focus:ring-red-500 sm:text-sm sm:leading-6;
+      
     }
     ._disable-btnPassword
     {

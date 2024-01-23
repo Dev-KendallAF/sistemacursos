@@ -1,6 +1,6 @@
 @php $hName='Curso' @endphp
 
-<x-layouts.panel  headerName="{{$hName}}" index='5'>
+<x-layouts.panel  headerName="{{$hName}}" index='3'>
   <x-slot name="content">
     <div class="continer mx-auto ">
       <!--history-->
@@ -11,7 +11,7 @@
           {{$hName}}</h1>
 
           
-            <a href="{{route('categoria.create')}}" class="font-semibold text-sm rounded-lg mt-5 inline-block bg-indigo-500 p-2 shadow-md shadow-indigo-500/50 hover:bg-indigo-600 text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"><i class="fa-solid fa-plus"></i> Crear Nuevo </a>
+            <a href="{{route('curso.create')}}" class="font-semibold text-sm rounded-lg mt-5 inline-block bg-indigo-500 p-2 shadow-md shadow-indigo-500/50 hover:bg-indigo-600 text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"><i class="fa-solid fa-plus"></i> Crear Nuevo </a>
 
           
 
@@ -38,17 +38,17 @@
               </tr>
           </thead>
           <tbody>
-              @foreach ($Curso as $p)
+              @foreach ($cursos as $p)
                   <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                       <td data-label="ID" class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $p->id }}</td>
-                      <td data-label="Nombre Categoria">{{ $p->nombre }}</td>
+                      <td data-label="Nombre curso">{{ $p->nombre }}</td>
                       <td data-label="Fecha modificación">{{ $p->updated_at }}</td>
                       <td data-label="Estado" class="estado {{ $p->estado == 1 ? 'estado__activo' : 'estado__inactivo' }}">
                         {{ $p->estado == 1 ? 'Activo' : 'Inactivo' }}
                     </td>
                                           <td data-label="Acciones" class="action">
-                          <a href="{{ route('categoria.show', $p) }}"><i class="fa-regular fa-eye"></i></a>
-                          <a href="{{ route('categoria.edit', $p) }}"><i class="fa-regular fa-pen-to-square"></i></a>
+                          <a href="{{ route('curso.show', $p) }}"><i class="fa-regular fa-eye"></i></a>
+                          <a href="{{ route('curso.edit', $p) }}"><i class="fa-regular fa-pen-to-square"></i></a>
                       </td>
                   </tr>
               @endforeach

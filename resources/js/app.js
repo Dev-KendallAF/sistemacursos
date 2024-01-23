@@ -14,6 +14,7 @@ setTimeout(()=>
 import './utilities/dropdown';
 import './utilities/maskInput';
 import './utilities/switch';
+import './utilities/textareaCount';
 
 
 
