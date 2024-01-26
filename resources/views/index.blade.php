@@ -39,8 +39,28 @@
   <div class="container mx-auto" id="cursos">
   <h2 class="text-4xl font-semibold text-indigo-500 dark:text-cyan-300 my-7 text-center ">Seleccionar Curso</h2>
     <div class="flex flex-col flex-wrap  gap-5">
-@foreach ([1,2,3,4,5,6,7,8,9, 10] as $i)
-    <div class="bg-white dark:bg-gray-800 shadow-xl p-24 rounded-lg"></div>
+@foreach ($cursos as $c)
+    <div class="bg-white dark:bg-gray-800 shadow-xl p-24 py-10 my-3 rounded-lg">
+      <div class="grid grid-cols-2 gap-6">
+        <div>
+          <span class="font-semibold text-sm dark:text-white">{{$c->nombre}}</span>
+          <h2 class="font-semibold text-3xl text-indigo-500 dark:text-cyan-300">{{$c->nombre}}</h2>
+          <p class="text-gray-500 text-sm pr-24 py-3">{{$c->descripcion}}</p>
+        </div>
+        <div>
+            
+          <div style=" display: flex !important;
+          justify-content: flex-end !important;">
+            <p class="text-sm text-gray-500">{{$c->updated_at}}</p>
+          </div>
+          <div class="grid  items-center">
+            <a href="#" class="rounded-xl text-center bg-indigo-600 w-100 my-10 p-2  shadow-md shadow-indigo-500/50 text-white  ">
+              Inscribete ahora
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
     
 @endforeach
     </div>

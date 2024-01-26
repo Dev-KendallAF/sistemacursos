@@ -8,7 +8,7 @@
 
         
         <h1>
-          {{$categoria->nombreCompleto}}</h1>
+          {{$categoria->nombre}}</h1>
       </div>
       
       <!--data-->

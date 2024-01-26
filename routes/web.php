@@ -5,7 +5,9 @@ use App\Http\Controllers\CursoController;
 use App\Http\Controllers\PersonaController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\StudentController;
-
+use App\Models\Curso;
+use App\Models\Categoria;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 
@@ -78,10 +80,10 @@ Route::controller(PersonaController::class)->group(
             Route::get("$ruta/create", 'create')->name("$name.create");
     
             Route::post("$ruta", 'store')->name("$name.store");
-            Route::get("$ruta/{persona}/show", 'show')->name("$name.show");
-            Route::get("$ruta/{persona}/edit", 'edit')->name("$name.edit");
+            Route::get("$ruta/{curso}/show", 'show')->name("$name.show");
+            Route::get("$ruta/{curso}/edit", 'edit')->name("$name.edit");
     
-            Route::put("$ruta/{persona}", 'update')->name("$name.update");
+            Route::put("$ruta/{curso}", 'update')->name("$name.update");
         });
     });
     
@@ -90,7 +92,14 @@ Route::controller(PersonaController::class)->group(
        
 
 Route::get('/', function () {
-    return view('index');
+    $cursos = Curso::all();
+    $categorias = Categoria::all();
+    $profesores = User::join('personas', 'users.persona_id', '=', 'personas.id')
+        ->where('users.role_id', 2)
+        ->select('users.*', 'personas.*')
+        ->get();
+
+    return view('index',compact('cursos','profesores'));
 })->name('index');
 
 Route::get('/user/confirm/EmailValidation', function () {

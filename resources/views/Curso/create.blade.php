@@ -39,7 +39,7 @@
                   <div class="form-group @error('categoria_id') invalid @enderror">
                     <label for="slc_categoria" class=" dark:text-indigo-500 error:border-red-500  "> <i class="fa-solid fa-book-open text-indigo-600 "></i> Categor&iacute;a</label>
                     <select  name="categoria_id" id="slc_categoria"    autocomplete="off" >
-                      <option value="0" default>Selecciona una Categoría</option>
+                      <option value="0" selected>Selecciona una Categoría</option>
                      
                       @foreach ($categorias as $c)
                           <option value="{{ $c->id }}">{{ $c->nombre }}</option>
@@ -55,7 +55,7 @@
                       <label for="slc_profesor" class=" dark:text-indigo-500 error:border-red-500  "> <i class="fa-solid fa-chalkboard-user text-indigo-600 "></i> Profesor</label>
                       
                       <select  name="profesor_id" id="slc_profesor"    >
-                        <option value="0" default>Asigna un Profesor</option>
+                        <option value="0" selected>Asigna un Profesor</option>
                        
                         @foreach ($profesores as $p)
                             <option value="{{ $p->id }}">{{ $p->nombreCompleto }}</option>
